@@ -3,14 +3,17 @@
   //don't want to run on things like google docs
 
 
+
 const wordList = ['genre', 'genres', 'fiction', 'novel',
-'non-fiction', 'nonfiction', 'action', 'comedy', 'drama', 'fantasy', 'horror',
+'non-fiction', 'nonfiction', 'comedy', 'drama', 'fantasy', 'horror',
 'mystery', 'romance', 'thriller', 'sci fi', 'sci-fi'];
+//"action" shows up on every google page need a fix
 
 var word = "";
 var wordMatches = 0;
 var count = 0;
 var index = 0;
+var foundWord = new Boolean(false); //Working on causing this to trigger popup
 
 //loops through wordList array to see if certain words appear on current site
 try {
@@ -22,10 +25,12 @@ try {
 
     if(wordMatches != null && wordMatches.length > 0) {
       console.log(wordList[index]);
+      foundWord = true;
     }
-  index++;
-}
-} catch {
-  console.log("error");
-}
+    index++;
+  }
+  //chrome.runtime.sendMessage({Boolean: foundWord});
 
+} catch (err) {
+  console.log(err);
+}
