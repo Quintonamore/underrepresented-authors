@@ -21,7 +21,7 @@
   "permissions": ["storage", "scripting", "tabs", "contextMenus", "activeTab"],
 
 
-  "browser_action": {
+  "action": {
     "default_popup": "index.html",
     "default_title": "BIPOC Authors", //to change
     "default_icon": "icon128.png"
