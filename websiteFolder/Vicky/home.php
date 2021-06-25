@@ -1,26 +1,31 @@
+<?php
+session_start();
+require('db.php');
+?>
 <html>
 <head>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- connect to database-->
 <?php
 
-$servername = "localhost";
-$username = 'studentweb1';
-$password = 'bipoc1';
-$db = 'bipoc_authors';
-$host = 'localhost';
 
-$link = mysqli_init();
-$success = mysqli_real_connect(
-   $link, 
-   $host, 
-   $username, 
-   $password, 
-   $db
-)OR die('could not connect to MySQL' . mysqli_connect_error($link));
+if(isset($_SESSION['inDB'])&& $_SESSION['inDB']){
+echo "<div class='dropdown'> <button class='dropbtn'>". $_SESSION['user']. "</button> <div class='dropdown-content'>
+    <a href='#'>My Favorites</a>
+    <a href='logout.php'>Logout</a>
+  </div>
+</div> ";
+}
+else{
+    echo "<div class='dropdown'> <button class='dropbtn'>Dropdown</button> <div class='dropdown-content'>
+    <a href='login.php'>log-in</a>
+    <a href='#'>sign up</a>
+    <a href='#'>Link 3</a>
+  </div>
+</div> ";
 
+}
 /*
 //create connection
 $conn = new mysqli($servername, $username, $password, $db);
@@ -271,7 +276,7 @@ $AndUsed = false;
 	   $query .= ")";
    }
    $query .= ";";
-   echo $query;
+   //echo $query;
 
    $sql = @mysqli_query($link, $query);
 
@@ -282,6 +287,8 @@ $AndUsed = false;
 
        }
    }
+   else
+        echo "No mathes within our databse.";
   
 }
 
