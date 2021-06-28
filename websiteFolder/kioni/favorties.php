@@ -36,9 +36,11 @@ else{
 <div class = "text">
 <div class = "space" id= "space">
 <?php
+ if( $_SESSION['user'] != ""){
  $like = $_POST["like"];
 echo $like[0]; 
-$noyj = @mysqli_multi_query($link,$like[0] );
+@mysqli_multi_query($link,$like[0] );
+}
 $query = "SELECT DISTINCT *
 FROM favorites  RIGHT JOIN books_authors ON favorites.ISBN = books_authors.ISBN WHERE favorites.username = '". $_SESSION['user'] ."';";
 echo $query;

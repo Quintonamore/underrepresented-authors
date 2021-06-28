@@ -102,9 +102,11 @@ echo "Connected successfully";
 
 <!-- Get info from user input-->
 <?php
+if( $_SESSION['user'] != ""){
  $like = $_POST["like"];
 echo $like[0]; 
 $noyj = @mysqli_multi_query($link,$like[0] );
+}
 if(isset($_POST["search"])){
 
     //basically gets the values that were chosen in the checkbox and puts in array

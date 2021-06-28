@@ -36,29 +36,39 @@ else{
 <div class = "text">
 <div class = "space" id= "space">
 <?php
- $like = $_POST["like"];
+if( $_SESSION['user'] != ""){
+	 $like = $_POST["like"];
+	for($x =1; $x < count($like); $x++){
+		$like[0] .= $like[$x];
+		
+	}
 echo $like[0]; 
 $noyj = @mysqli_multi_query($link,$like[0] );
+}
 $query = "SELECT * FROM books_authors ORDER BY Rating DESC;";
  $sql = @mysqli_query($link, $query);
+ 
  if(mysqli_num_rows($sql) > 0){
        //output data of each row
+	   echo "<form id = 'form' action = '' method = 'post'> "; 
        while($row = mysqli_fetch_array($sql,MYSQLI_NUM)){
-		echo  " <form id = 'form' action = '' method = 'post'> 
+		echo  " 
 		<div><br/> ". $row[0]. " ". $row[1]. " ". $row[2] . " ". $row[3]. " ".$row[4]. " ". $row[5]. " ". $row[6]. " ". $row[7]. " ". $row[8]. " rating: ". ($row[9]/$row[10]) . " rated by #users " . $row[10] .  
-		" <button name='like[]' type='submit'  value='
+		" <input type = 'checkbox' id = 'like' name='like[]' type='submit'  value='
 		INSERT INTO `favorites`(`username`, `ISBN`) VALUES ( \"". $_SESSION['user'] ." \" ,". $row[8] . "); 
-		UPDATE `books_authors` SET Rating =" . ($row[9] +1) .", ofRatings = " . ($row[10] +1) . " WHERE ISBN =". $row[8]. ";
-		'>Like</button>  
-		<button name='like[]' type='submit'  value='
-		UPDATE `books_authors` SET Rating =" . ($row[9] -1) .", ofRatings = " . ($row[10] + 1) . " WHERE ISBN =". $row[8]. ";
+		UPDATE `books_authors` SET Rating = Rating + 1 , ofRatings = " . ($row[10] +1) . " WHERE ISBN =". $row[8]. ";
+		'><label for='like'>Like</label>  
+		<input type = 'checkbox' id ='dislike' name='like[]' type='submit'  value='
+		UPDATE `books_authors` SET Rating = Rating -1, ofRatings = " . ($row[10] + 1) . " WHERE ISBN =". $row[8]. ";
 		DELETE FROM `favorites` WHERE username = \"". $_SESSION['user'] . "\" AND `ISBN` =" .$row[8] . ";
-		'>DisLike</button>  
+		'><label for='dislike'>Dislike</label>  
 		
-		</div> </form>"  ;
+		</div> "  ;
 
        }
+	   echo "<button type='submit' name = 'search' value = 'Search'>Submit ratings </button></form>";
    }
+   
    else
         echo "No mathes within our databse.";
   
