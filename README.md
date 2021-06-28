@@ -1,1 +1,1 @@
-# bipoc-authors-chrome-extension
+# underrepresented-authors
