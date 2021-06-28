@@ -1,0 +1,39 @@
+{
+  "name": "Under-represented Authors",
+  "description": "Find books from under-represented authors",
+  "version": "1.0",
+  "manifest_version": 3,
+
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "permissions": ["storage", "scripting", "tabs", "contextMenus", "activeTab"],
+
+  //added this
+  "content_scripts": [
+    {
+      //need to change to certain urls (also exclude our own website)
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["*://*.youtube.com/*", "*://*.google.com/*", "*://*/*movie*","*://*/*movies*", "*://*.netflix.com/*", "*://*/*show*", "*://*/*shows*", "*://*.stackoverflow.com/*"],
+      "js": ["content.js"],
+      "css": ["demoStyles.css"]
+    }
+  ],
+
+
+  "action": {
+    "default_popup": "demo.html",
+    "default_title": "Search for books",
+    "default_icon": "icon128.png"
+
+  }
+
+}

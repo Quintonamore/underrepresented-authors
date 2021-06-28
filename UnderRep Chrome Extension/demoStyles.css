@@ -1,0 +1,25 @@
+h2 {
+  color: black;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+h3{
+  color: black;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+button{
+  background-color: SteelBlue;
+  color: white;
+  font-size: 16px;
+  font-family: "Courier New", "Lucida", monospace;
+  font-style: normal;
+  padding: 10px 24px;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}
+
+button:hover{
+  background-color: white;
+  color: black;
+}
