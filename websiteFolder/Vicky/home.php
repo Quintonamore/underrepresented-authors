@@ -288,7 +288,7 @@ $AndUsed = false;
             <form action = "" method = "POST"><br/>
             <?php
             echo $lastName. ", ". $firstName. "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
-            Approval Rating: ".$approval ?>
+            Approval Rating: ".$approval." %"; ?>
             <button type = "submit" name = "like" value = "Like" formaction="likes.php"> Like </button>
             <button type = "submit" name = "dislike" value = "Dislike">  Dislike </button>
             </form>
