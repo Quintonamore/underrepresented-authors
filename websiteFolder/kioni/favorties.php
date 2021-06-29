@@ -35,30 +35,39 @@ else{
 </div> 
 <div class = "text">
 <div class = "space" id= "space">
-<?php
- if( $_SESSION['user'] != ""){
- $like = $_POST["like"];
-echo $like[0]; 
-@mysqli_multi_query($link,$like[0] );
-}
+<?php 
 $query = "SELECT DISTINCT *
 FROM favorites  RIGHT JOIN books_authors ON favorites.ISBN = books_authors.ISBN WHERE favorites.username = '". $_SESSION['user'] ."';";
-echo $query;
+
  $sql = @mysqli_query($link, $query);
  if(mysqli_num_rows($sql) > 0){
        //output data of each row
        while($row = mysqli_fetch_array($sql,MYSQLI_NUM)){
-		echo  " <form id = 'form' action = '' method = 'post'> 
-		<div><br/> ". $row[2]. " ". $row[3]. " ". $row[4] . " ". $row[5]. " ".$row[6]. " ". $row[7]. " ". $row[8]. " ". $row[9]. " ". $row[10]. " rating: ". ($row[11]/$row[12]) . " rated by #users " . $row[12] .  
-		"
-		<button name='like[]' type='submit'  value='
-		UPDATE `books_authors` SET Rating =" . ($row[11] -1) .", ofRatings = " . ($row[12] + 1) . " WHERE ISBN =". $row[10]. ";
-		DELETE FROM `favorites` WHERE username = \"". $_SESSION['user'] . "\" AND `ISBN` =" .$row[10] . ";
-		'>DisLike</button>  
-		
-		</div> </form>"  ;
+		  $lastName= $row[2] ;
+            $firstName = $row[3];
+            $title = $row[4];
+            $year = $row[5];
+            $genre2 = $row[6];
+            $theme2 = $row[7];
+            $ident2 = $row[8];
+            $length2 = $row[9];
+            $isbn = $row[10];
+            $approval = $row[11];
+            $_SESSION['isbn'] = $isbn;
+			$_SESSION['retuen'] = "favorties.php";
+            ?>
+            <form action = "" method = "POST"><br/>
+            <?php
+            echo $lastName. ", ". $firstName. "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
+            Approval Rating: ".$approval." %"; ?>
+            <button type = "submit" name = "dislike" value = "<?php echo $isbn; ?>" formaction="dislikes.php" >  Dislike </button>
+            </form>
 
+            <?php
+		
        }
+	  
+	   
    }
    else
         echo "No mathes within our databse.";

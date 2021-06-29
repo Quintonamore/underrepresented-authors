@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('db.php');
+//include('likeDislike.php');
 ?>
 <html>
 <head>
@@ -10,7 +11,7 @@ require('db.php');
 <?php
 
 
-if(isset($_SESSION['inDB'])&& $_SESSION['inDB']){
+if(isset($_SESSION['inDB'])&& isset($_SESSION['user']) && $_SESSION['inDB']){
 echo "<div class='dropdown'> <button class='dropbtn'>". $_SESSION['user']. "</button> <div class='dropdown-content'>
     <a href='favorties.php'>My Favorites</a>
     <a href='logout.php'>Logout</a>
@@ -18,25 +19,13 @@ echo "<div class='dropdown'> <button class='dropbtn'>". $_SESSION['user']. "</bu
 </div> ";
 }
 else{
-    echo "<div class='dropdown'> <button class='dropbtn'>Log-in</button> <div class='dropdown-content'>
-    <a href='login.php'>log-in</a>
-    <a href='createAccount.php'>sign up</a>
-    
+    echo "<div class='dropdown'> <button class='dropbtn'>Account</button> <div class='dropdown-content'>
+    <a href='login.php'>Log In</a>
+    <a href='createAccount.php'>Sign Up</a>
   </div>
 </div> ";
 
 }
-/*
-//create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-//check connection
-if(!$conn){
-    die("Connection failed: ".mysqli_connect_error());
-}
-echo "Connected successfully";
-
-*/
 ?>
 
 <!-- Begin Webpage -->
@@ -102,18 +91,22 @@ echo "Connected successfully";
 
 <!-- Get info from user input-->
 <?php
-if( $_SESSION['user'] != ""){
- $like = $_POST["like"];
-echo $like[0]; 
-$noyj = @mysqli_multi_query($link,$like[0] );
-}
-if(isset($_POST["search"])){
+if(isset($_POST["search"] ) || isset($_SESSION['search'])){
 
     //basically gets the values that were chosen in the checkbox and puts in array
-    $genre = $_POST['genre'];
-    $theme = $_POST['theme'];
-    $identity = $_POST['ident'];
-    $length = $_POST['length'];
+	if(isset($_POST['search'])){
+	$_SESSION['genre'] = $_POST['genre'];
+    $_SESSION['theme'] = $_POST['theme'];
+    $_SESSION['identity'] = $_POST['ident'];
+    $_SESSION['length'] = $_POST['length'];
+	$_SESSION['search'] = $_POST['search'];
+	}
+	
+    $genre = $_SESSION['genre'];
+    $theme =  $_SESSION['theme'];
+    $identity = $_SESSION['identity'];
+    $length =  $_SESSION['length'];
+	
 
 
     //GENRES
@@ -287,25 +280,40 @@ $AndUsed = false;
 
    if(mysqli_num_rows($sql) > 0){
        //output data of each row
-       while($row = mysqli_fetch_array($sql,MYSQLI_NUM)){
-        // FOR LIKE BUTTON 
-        echo  " <form id = 'form' action = '' method = 'post'> 
-		<div><br/> ". $row[0]. " ". $row[1]. " ". $row[2] . " ". $row[3]. " ".$row[4]. " ". $row[5]. " ". $row[6]. " ". $row[7]. " ". $row[8]. " rating: ". ($row[9]/$row[10]) . " rated by #users " . $row[10] .  
-		" <button name='like[]' type='submit'  value='
-		INSERT INTO `favorites`(`username`, `ISBN`) VALUES ( \"". $_SESSION['user'] ." \" ,". $row[8] . "); 
-		UPDATE `books_authors` SET Rating =" . ($row[9] +1) .", ofRatings = " . ($row[10] +1) . " WHERE ISBN =". $row[8]. ";
-		'>Like</button>  
-		<button name='like[]' type='submit'  value='
-		UPDATE `books_authors` SET Rating =" . ($row[9] -1) .", ofRatings = " . ($row[10] + 1) . " WHERE ISBN =". $row[8]. ";
-		DELETE FROM `favorites` WHERE username = \"". $_SESSION['user'] . "\" AND `ISBN` =" .$row[8] . ";
-		'>DisLike</button>  
-		
-		</div> </form>"  ;
+       
+        while($row = mysqli_fetch_array($sql,MYSQLI_NUM)){
+            $lastName= $row[0] ;
+            $firstName = $row[1];
+            $title = $row[2];
+            $year = $row[3];
+            $genre2 = $row[4];
+            $theme2 = $row[5];
+            $ident2 = $row[6];
+            $length2 = $row[7];
+            $isbn = $row[8];
+            $approval = $row[9];
+            $_SESSION['isbn'] = $isbn;
+			$_SESSION['retuen'] = "home.php";
+            ?>
+            <form action = "" method = "POST"><br/>
+            <?php
+            echo $lastName. ", ". $firstName. "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
+            Approval Rating: ".$approval." %"; ?>
+            <button type = "submit" name = "like" value = "<?php echo $isbn; ?>" formaction="likes.php"> Like </button>
+             <button type = "submit" name = "dislike" value = "<?php echo $isbn; ?>" formaction="dislikes.php" >  Dislike </button>
+            </form>
 
-       }
+            <?php
+        }
+        
+
+       //if not signed, click on button and direct to log in page.
+       //if signed in, click on button, change color + insert into favorites/ dislikes
+       //if clicked on again, change back to original color and update favorites/ dislikes
+       //update approval column in books_authors table
    }
    else
-        echo "No mathes within our databse.";
+        echo "No matches within our databse.";
   
 }
 
@@ -336,6 +344,8 @@ $("#form").on("submit", function(event) {
 		var $text= $("<p>"+ genre + " " + theme + " " + authorID +" "+ Booklength +" "+ name + "<p>");
 		$text.appendTo("#space")
     });
+
+    
 
 </script>
 </body>

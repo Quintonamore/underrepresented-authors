@@ -10,15 +10,16 @@ require('db.php');
 <?php
 if(isset($_SESSION['inDB'])&& $_SESSION['inDB']){
 echo "<div class='dropdown'> <button class='dropbtn'>". $_SESSION['user']. "</button> <div class='dropdown-content'>
-    <a href='favorties.php'>My Favorites</a>
+    <a href='#'>My Favorites</a>
     <a href='logout.php'>Logout</a>
   </div>
 </div> ";
 }
 else{
-    echo "<div class='dropdown'> <button class='dropbtn'>Log-in</button> <div class='dropdown-content'>
+    echo "<div class='dropdown'> <button class='dropbtn'>Dropdown</button> <div class='dropdown-content'>
     <a href='login.php'>log-in</a>
-    <a href='createAccount.php'>sign up</a>
+    <a href='#'>sign up</a>
+    <a href='#'>Link 3</a>
   </div>
 </div> ";
 

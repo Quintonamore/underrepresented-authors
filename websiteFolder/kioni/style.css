@@ -67,7 +67,16 @@
     background-color: #FFFFF0;
     font-size: 100%;
     margin: auto;
+    text-align: center;
     width: 60%;
+    padding: 10px;
+  }
+  .errorMessage{
+    background-color: #FFFFF0;
+    font-size: 100%;
+    margin: auto;
+    width: 60%;
+    text-align: center;
     padding: 10px;
   }
   .button {
@@ -84,6 +93,21 @@
   }
   .button:hover {background-color: #2980B9;}
 
+  .accountButton{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .bookTitle{
+    font-style: italic;
+  }
   /*Dropdown Button */
   .dropbtn {
   background-color: #04AA6D;
