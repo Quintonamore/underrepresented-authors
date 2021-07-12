@@ -19,6 +19,7 @@ jQuery Ajax CDN
 <body>
 <?php
 
+unset($_SESSION['favVisit']);
 
 if(isset($_SESSION['inDB'])&& isset($_SESSION['user']) && $_SESSION['inDB']){
 echo "<div class='dropdown'> <button class='dropbtn'>". $_SESSION['user']. "</button> <div class='dropdown-content'>
@@ -52,13 +53,15 @@ else{
 <label> Genre 
 <fieldset>           
         <input type="checkbox" name="genre[]" value="Any">Any<br>      
-        <input type="checkbox" name="genre[]" value="Biography">Biography<br>      
+        <input type="checkbox" name="genre[]" value="Biography">Biography<br>
+        <input type="checkbox" name="genre[]" value="Autobiography">Autobiography<br>   
+        <input type="checkbox" name="genre[]" value="Fiction">Fiction<br> 
         <input type="checkbox" name="genre[]" value="Sci-Fi">Science Fiction<br>
 		<input type="checkbox" name="genre[]" value="Fantasy">Fantasy<br>      
         <input type="checkbox" name="genre[]" value="Mystery">Mystery<br>      
         <input type="checkbox" name="genre[]" value="Thriller">Thriller<br>      
         <input type="checkbox" name="genre[]" value="Romance">Romance<br>      
-		<input type="checkbox" name="genre[]" value="Autobiography">Autobiography<br>      
+		    
     </fieldset>
 </label>
 <label> Book Themes
@@ -67,7 +70,8 @@ else{
         <input type="checkbox" name="theme[]" value="BIPOC">BIPOC<br>      
         <input type="checkbox" name="theme[]" value="LGBTQ+">LGBTQ+<br>
 		<input type="checkbox" name="theme[]" value="Neurodivergent">Neurodivergent<br>      
-        <input type="checkbox" name="theme[]" value="Women">Women<br>    
+        <input type="checkbox" name="theme[]" value="Women">Women<br>
+        <input type="checkbox" name="theme[]" value="Family">Family<br>    
     </fieldset>
 </label>
 <label> Author identity
@@ -87,7 +91,7 @@ else{
 		<input type="checkbox" name="length[]" value="Short Story">Short Story<br>  
     </fieldset>
 </label>
-<label>Authors Name (Last Name, First Name) 
+<label>Author's Name (FirstName LastName) 
         <input id = "name" name="Name" type="text">
         </label>
 		<?php 
@@ -222,7 +226,7 @@ if(isset($_POST["search"])|| isset($_SESSION['return'])){
 	$whereUsed = false;
 $query = "SELECT * FROM books_authors";
 $AndUsed = false;
-if(!empty($_SESSION['genre'])){
+if(!empty($_SESSION['genre'])&& ($_SESSION['genre'][0]!="Any")){
    for ($i=0; $i< sizeof($_SESSION['genre']);$i++) {  
 	   
 	   if($whereUsed){
@@ -248,7 +252,7 @@ if(!empty($_SESSION['genre'])){
 	   $query .= ")";
    }
 }
-if(!empty($_SESSION['theme'])){
+if(!empty($_SESSION['theme'])&& ($_SESSION['theme'][0]!="Any")){
    $AndUsed = false;
    for ($i=0; $i<sizeof ($_SESSION['theme']);$i++) {  
 	   if($whereUsed){
@@ -274,7 +278,7 @@ if(!empty($_SESSION['theme'])){
 	   $query .= ")";
    }
 }
-if(!empty($_SESSION['identity'])){
+if(!empty($_SESSION['identity'])&& ($_SESSION['identity'][0]!="Any")){
    $AndUsed = false;
    for ($i=0; $i<sizeof ($_SESSION['identity']);$i++) {  
 	   if($whereUsed){
@@ -300,7 +304,7 @@ if(!empty($_SESSION['identity'])){
    
 
 }
-if(!empty($_SESSION['length'])){
+if(!empty($_SESSION['length'])&& ($_SESSION['length'][0]!="Any")){
     $AndUsed = false;
    for ($i=0; $i<sizeof ($_SESSION['length']);$i++) {  
 	   
@@ -360,12 +364,17 @@ if(!empty($_SESSION['length'])){
             <?php
             echo $_SESSION['lastName']. ", ". $_SESSION['firstName']. "- \"".$_SESSION['title']."\", ".$_SESSION['year']. ", ISBN: ".$_SESSION['isbn']. "</br> 
             Approval Rating: ".$_SESSION['approval']." %"; ?>
-            <button id = "likeB" type = "submit" name = "like" value = "<?php echo $isbn; ?>" formaction="likes.php"> Like </button>
-            <button id = "dislikeB" type = "submit" name = "dislike" value = "<?php echo $isbn; ?>" formaction="dislikes.php">  Dislike </button>
+            <button class = "likesButtons" id = "likeB" type = "submit" name = "like" value = "<?php echo $isbn; ?>" formaction="likes.php"> Like </button>
+            <button class = "likesButtons" id = "dislikeB" type = "submit" name = "dislike" value = "<?php echo $isbn; ?>" formaction="dislikes.php">  Dislike </button>
             </form>
 
             <?php
-        
+            //unset session variables from checkboxes
+            unset($_SESSION['genre']);
+            unset($_SESSION['theme']);
+            unset($_SESSION['identity']);
+            unset($_SESSION['length']);
+
         }
         
 
