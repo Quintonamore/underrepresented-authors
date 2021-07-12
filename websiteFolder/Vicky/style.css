@@ -91,6 +91,19 @@
     margin: 4px 2px;
     cursor: pointer;
   }
+  .likesButtons{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .likesButtons:focus{background-color: #2980B9;}
   .button:hover {background-color: #2980B9;}
 
   .accountButton{
