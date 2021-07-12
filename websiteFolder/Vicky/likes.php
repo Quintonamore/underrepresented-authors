@@ -15,15 +15,66 @@ if(!isset($_SESSION['user'])){
     exit;
 }
 else{
-    //check if user already liked the book
-
-    //insert like into user ratings
+   
     $ISBN = $_POST['like'];
-    $likeSQLIn = "INSERT INTO ratings 
-            VALUES ('". $_SESSION['user']."', '". $ISBN . "', 'like')";
-            //ON DUPLICATE KEY UPDATE rating = 'like';";
-    //echo $likeSQLIn;
-    $result = mysqli_query($link, $likeSQLIn);
+
+    /**FIRST LIKE  */
+    //if no row exists with user and isbn, add to ratings with like
+    //and update database 
+    $checkIfLike = "SELECT * FROM ratings WHERE isbn2 = '". $ISBN. "' AND user2 = '".$_SESSION['user']."'";
+    $checkresult2 = mysqli_query($link, $checkIfLike);
+    if(mysqli_num_rows($checkresult2)==0){
+        $likeSQLIn = "INSERT INTO ratings 
+                        VALUES ('". $_SESSION['user']."', '". $ISBN . "', 'like')";
+        //echo $likeSQLIn;
+        mysqli_query($link, $likeSQLIn);
+
+        //added true
+        $_SESSION['likeAdded'] = true; 
+        unset($_SESSION['visitLike']);
+
+    }
+    else{
+        //if like already exists
+        //check if user already liked the book
+        // check database for isbn and 'like'
+        /*********UNLIKE********/
+        
+        $checkLike = "SELECT * FROM ratings WHERE isbn2 = '". $ISBN. "' AND user2 = '".$_SESSION['user']."' AND rating = 'like'";
+        //echo $checkLike;
+        $checkresult = mysqli_query($link, $checkLike);
+        //echo ;
+        if((isset($_SESSION['likeAdded']) && isset($_SESSION['visitLike']))|| (mysqli_num_rows($checkresult)>0)){
+                //if liked before, delete like from ratings table
+                $unlikeSQL = "DELETE FROM ratings WHERE user2 = '". $_SESSION['user']."' AND isbn2 = '".$ISBN."' AND rating = 'like'";
+                echo $unlikeSQL;
+                mysqli_query($link, $unlikeSQL);
+                //unset session variable
+                unset($_SESSION['likeAdded']);
+
+        }
+        
+        
+
+        //if liked, but disliked before change dislike to like
+        /*DISLIKE TO LIKE *******/
+        $checkDislike = "SELECT * FROM ratings WHERE isbn2 = '". $ISBN. "' AND user2 = '".$_SESSION['user']."' AND rating = 'dislike'";
+        //echo $checkDislike;
+        $checkresultD = mysqli_query($link, $checkDislike);
+        if(mysqli_num_rows($checkresultD)>0){
+                //change like to dislike
+                $like2SQL = "UPDATE `ratings` SET `rating`='like' WHERE `user2`='".$_SESSION['user']."' AND `isbn2`='". $ISBN."' AND `rating`='dislike'";
+                //echo $like2SQL;
+                mysqli_query($link, $like2SQL);
+                $_SESSION['likeAdded'] = true;
+        }
+
+    }
+    
+     
+
+    
+    //once liked, change button color 
    
 
     //update the ratings in the books_authors table
@@ -49,8 +100,14 @@ else{
     //add the total 
     $total = $numLikes + $numdisLikes;
     echo $total."</br>";
-    //get approval rating
-    $approval = $numLikes / $total;
+    if($total == 0){
+            $approval = 0;
+    }
+    else{
+        //get approval rating
+        $approval = $numLikes / $total;
+    }
+    
     // decimal to percent
     $likeRate = number_format($approval, 2, '.', '') * 100;
     echo $likeRate."</br>";
@@ -61,6 +118,7 @@ else{
     $_SESSION['approval']= $likeRate;
     
     $_SESSION['return'] = "home.php";
+    $_SESSION['visitLike'] = true;
 
     header("Location:". $_SESSION['return']);
 }
