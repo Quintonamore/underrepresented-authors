@@ -9,7 +9,7 @@
       }
     </style>
 <link rel = "stylesheet" type = "text/css" href = "demoStyles.css">
-    <title></title>
+    
   </head>
 
   <body>
@@ -19,10 +19,14 @@
     <br>
     <div id="buttons">
       <form action = "https://www.goodreads.com/" method = "get" target = "_blank">
-      <button type = "submit" id="btnVisitWebsite">Visit Website</button>
+        <button type = "submit" id="btnVisitWebsite">Visit Website</button>
       </form>
       <br>
-      <button id = "btnSuggestBook">Suggest Book</button>
+      <!--Have the user type the book's title and author that they want to suggest-->
+          <!--Could also ask for more information on the book from the user-->
+          <!--Also remembers url book was suggested from-->
+        <a href = "book_suggest_page.html"><button id = "btnSuggestBook">Suggest Book</button></a>
+
     </div>
     <script src="demo.js"></script>
   </body>

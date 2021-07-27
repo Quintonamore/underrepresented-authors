@@ -9,7 +9,7 @@ h3{
 }
 
 button{
-  background-color: SteelBlue;
+  background-color: steelblue;
   color: white;
   font-size: 16px;
   font-family: "Courier New", "Lucida", monospace;
@@ -20,6 +20,10 @@ button{
 }
 
 button:hover{
-  background-color: white;
-  color: black;
+  background-color: #0E1A40;
+}
+
+#btnVisitWeb, #btnSuggestBook{
+  display: inline-block;
+  margin: 0 auto;
 }

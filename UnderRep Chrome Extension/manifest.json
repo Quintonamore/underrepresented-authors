@@ -15,6 +15,8 @@
     "service_worker": "background.js"
   },
 
+  "host_permissions": ["<all_urls>"],
+
   "permissions": ["storage", "scripting", "tabs", "contextMenus", "activeTab"],
 
   //added this
@@ -22,12 +24,16 @@
     {
       //need to change to certain urls (also exclude our own website)
       "matches": ["<all_urls>"],
-      "exclude_matches": ["*://*.youtube.com/*", "*://*.google.com/*", "*://*/*movie*","*://*/*movies*", "*://*.netflix.com/*", "*://*/*show*", "*://*/*shows*", "*://*.stackoverflow.com/*"],
+      "exclude_matches": ["*://*.youtube.com/*", "*://*.google.com/*", "*://www.w3schools.com/*", "*://*/*movie*", "*://*/*movies*", "*://*.netflix.com/*", "*://*/*show*", "*://*/*shows*", "*://*.stackoverflow.com/*"],
       "js": ["content.js"],
       "css": ["demoStyles.css"]
     }
   ],
 
+  "web_accessible_resources": [{
+    "resources": ["recommend.html", "recommend.js", "recommendStyle.css"],
+    "use_dynamic_url": true
+    }],
 
   "action": {
     "default_popup": "demo.html",
@@ -35,5 +41,7 @@
     "default_icon": "icon128.png"
 
   }
+
+  //try web thing again but with recommend.html
 
 }

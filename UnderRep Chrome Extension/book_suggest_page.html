@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang = "en" dtr = "ltr">
+<head>
+  <style>
+    html, body {
+      text-align: center;
+      width:390px;
+      height:380px;
+    }
+  </style>
+  <link rel = "stylesheet" type = "text/css" href = "book_suggest_page_styles.css">
+  <title>Test</title>
+</head>
+<body>
+  <h2>Suggest a Book!</h2>
+
+  <!--Back button-->
+  <a href = "demo.html" class = "previous">&#8249;</a>
+
+  <br>
+  <hr>
+  <!--Need to customize required message-->
+  <!--Need to work on css design-->
+  <form id = "sheetdb-form" atuocomplete = "off" action = "https://sheetdb.io/api/v1/qug94x9fqzesa" method = "POST">
+    <div class = "book-info">
+      <div class = "left-side">
+
+        <!--Left side of popup asking user for title, author, isbn, and a description of suggested book-->
+        <label for = "bookTitle">Title:</label><br>
+        <input type = "text" id = "bookTitle" name= "data[Title:]" autocomplete = "off" required></input><br><br>
+
+        <label for = "bookAuthor">Author:</label><br>
+        <input type = "text" id = "bookAuthor" name= "data[Author:]" autocomplete = "off" required></input><br><br>
+
+        <!--Need to code so this inputs are the correct length-->
+
+        <!--Need to fix max length it isn't working-->
+        <label for = "bookISBN-10">ISBN-10:</label><br>
+        <input type="text" pattern="[0-9]{10}" id = "bookISBN-10" name= "data[ISBN-10:]" autocomplete = "off"></input><br>
+
+        <label for="bookISBN-13">ISBN-13:</label><br>
+        <input type="text" pattern="[0-9]{13}" id = "bookISBN-13" name= "data[ISBN-13:]" autocomplete = "off"></input><br><br>
+
+
+
+        <label for = "bookDes">Description:</label><br>
+        <textarea id = "bookDes" name = "data[Description:]" row = "10" cols = "16"></textarea>
+
+      </div>
+
+      <div class = "genres">
+        <!--Right side of popup asking for the book's genre(s)-->
+        <ul>
+          <label for = "genre">Genre(s):</label>
+          <li>
+            <input type="checkbox" id="genre1" name="data[Fiction:]" value="true">
+            <label for="genre1"> Fiction</label><br><br>
+            <span class = "checkmark"></span>
+          </li>
+
+          <li>
+            <input type="checkbox" id="genre2" name="data[Non-fiction:]" value="true">
+            <label for="genre2"> Non-Fiction</label><br><br>
+            <span class = "checkmark"></span>
+          </li>
+
+
+          <li>
+            <input type="checkbox" id="genre3" name="data[Comedy:]" value="true">
+            <label for="genre3"> Comedy</label><br><br>
+            <span class = "checkmark"></span>
+          </li>
+
+          <li>
+            <input type="checkbox" id="genre4" name="data[Drama:]" value="true">
+            <label for="genre4"> Drama</label><br><br>
+            <span class = "checkmark"></span>
+          </li>
+
+          <li>
+            <input type="checkbox" id="genre5" name="data[Thriller:]" value="true">
+            <label for="genre5"> Thriller</label><br><br>
+            <span class = "checkmark"></span>
+          </li>
+
+          <br>
+
+          <li>
+            <input type="checkbox" id="genre6" name="data[Mystery:]" value="true">
+            <label for="genre6"> Mystery</label><br><br>
+            <span class = "checkmark"></span>
+          </li>
+
+          <li>
+            <input type="checkbox" id="genre7" name="data[Romance:]" value="true">
+            <label for="genre7"> Romance</label><br><br>
+            <span class = "checkbox"></span>
+          </li>
+
+          <li>
+            <input type="checkbox" id="genre8" name="data[Fantasy:]" value="true">
+            <label for="genre8"> Fantasy</label><br><br>
+            <span class = "checkbox"></span>
+          </li>
+
+
+          <li>
+            <input type="checkbox" id="genre9" name="data[Sci-fi:]" value="true">
+            <label for="genre9"> Sci-Fi</label><br><br>
+            <span class = "checkbox"></span>
+          </li>
+
+          <li>
+            <input type="checkbox" id="genre10" name="data[Action:]" value="true">
+            <label for="genre10"> Action</label>
+            <span class = "checkbox"></span>
+          </li>
+
+        </ul>
+
+      </div>
+      <!--Submit button-->
+      <button type = "submit" id= "Sub">Submit</button>
+    </div>
+  </form>
+  <script src = "book_suggest_page.js"></script>
+</body>
+
+</html>
