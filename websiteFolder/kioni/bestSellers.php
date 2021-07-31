@@ -49,7 +49,7 @@ else{
     <div class = "space">
         <?php
         //show the books with ratings 60 percent and above in descending order
-        $favoritesSQL = "SELECT AuthLast, AuthFirst, BookTitle, Year, ISBN, Approval, bookcover, description 
+        $favoritesSQL = "SELECT AuthName, BookTitle, Year, ISBN, Approval, bookcover, description 
                           FROM books_authors
                           WHERE `Approval`> 60
                           ORDER BY Approval DESC";
@@ -59,26 +59,26 @@ else{
             //output data of each row
             $count =0;
             while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-                $lastName= $row[0] ;
+                $authName= $row[0] ;
                 
-                $firstName = $row[1];
                 
-                $title = $row[2];
                 
-                $year = $row[3];
+                $title = $row[1];
                 
-                $isbn = $row[4];
+                $year = $row[2];
                 
-                $approval = $row[5];
-				$bookcover = $row[6];
-				$description = $row[7];
+                $isbn = $row[3];
+                
+                $approval = $row[4];
+				$bookcover = $row[5];
+				$description = $row[6];
                 $count = $count +1;
                 
                 ?>
                 
                 <form id = "best" name ="bestSellers" method = "POST" ><br/>
                 <?php
-                echo $count. ". <img src=\"".$bookcover ."\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">".$lastName. ", ". $firstName. "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
+                echo $count. ". <img src=\"".$bookcover ."\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">". $authName. "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
                 Approval Rating: ".$approval."% Description: " . $description . ""; ?>
                 </form>
 

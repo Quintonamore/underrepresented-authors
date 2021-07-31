@@ -238,16 +238,16 @@ if(!empty($_SESSION['genre'])&& ($_SESSION['genre'][0]!="Any")){
 	   
 	   if($whereUsed){
 		   if($AndUsed){
-			   $query .= " OR Genre = '". $_SESSION['genre'][$i]. "'";
+			   $query .= " OR Genre LIKE '%". $_SESSION['genre'][$i]. "%'";
 		   }
 		   else{
 			   
-		   $query .= " AND ( Genre = '". $_SESSION['genre'][$i]. "'";
+		   $query .= " AND ( Genre LIKE '%". $_SESSION['genre'][$i]. "%'";
 		   $AndUsed = true;
 		   }
 	   }
 	   else{
-		   $query .= " WHERE ( Genre = '". $_SESSION['genre'][$i]. "'";
+		   $query .= " WHERE ( Genre LIKE '%". $_SESSION['genre'][$i]. "%'";
 		   $whereUsed = true;
 		   $AndUsed = true;
 	   }
@@ -345,36 +345,35 @@ if(!empty($_SESSION['length'])&& ($_SESSION['length'][0]!="Any")){
        //output data of each row
        
         while($row = mysqli_fetch_array($sql,MYSQLI_NUM)){
-            $lastName= $row[0] ;
-            $_SESSION['lastName']= $lastName;
-            $firstName = $row[1];
-            $_SESSION['firstName']=$firstName;
-            $title = $row[2];
+            $authName= $row[0] ;
+            $_SESSION['authName']= $authName;
+           
+            $title = $row[1];
             $_SESSION['title']=$title;
-            $year = $row[3];
+            $year = $row[2];
             $_SESSION['year']=$year;
-            $genre2 = $row[4];
+            $genre2 = $row[3];
             $_SESSION['genre2']=$genre2;
-            $theme2 = $row[5];
+            $theme2 = $row[4];
             $_SESSION['them2']=$theme2;
-            $ident2 = $row[6];
+            $ident2 = $row[5];
             $_SESSION['ident2']=$ident2;
-            $length2 = $row[7];
+            $length2 = $row[6];
             $_SESSION['length2']=$length2;
-            $isbn = $row[8];
+            $isbn = $row[7];
             $_SESSION['isbn']=$isbn;
-            $approval = $row[9];
+            $approval = $row[8];
             $_SESSION['approval']=$approval;
-			$bookcover = $row[10];
+			$bookcover = $row[9];
 			$_SESSION['book-cover'] = $bookcover;
-			$description = $row[11];
+			$description = $row[10];
 			$_SESSION['description'] = $description;
 
             ?>
             
             <form id = "buttonForm" name ="ratings" method = "POST" ><br/>
             <?php
-            echo "<img src=\"".$bookcover ."\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">".$_SESSION['lastName']. ", ". $_SESSION['firstName']. "- \"".$_SESSION['title']."\", ".$_SESSION['year']. ", ISBN: ".$_SESSION['isbn']. "</br> 
+            echo "<img src=\"".$bookcover ."\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">". $_SESSION['authName']."- \"".$_SESSION['title']."\", ".$_SESSION['year']. ", ISBN: ".$_SESSION['isbn']. "</br> 
             Approval Rating: ".$_SESSION['approval']."%, Description: " . $description . ""; ?>
             <button class = "likesButtons" id = "likeB" type = "submit" name = "like" value = "<?php echo $isbn; ?>" formaction="likes.php"> Like </button>
             <button class = "likesButtons" id = "dislikeB" type = "submit" name = "dislike" value = "<?php echo $isbn; ?>" formaction="dislikes.php">  Dislike </button>

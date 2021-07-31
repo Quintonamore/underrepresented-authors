@@ -49,7 +49,7 @@ else{
     <div class = "space">
         <?php
         //get all the user's liked books
-        $favoritesSQL = "SELECT AuthLast, AuthFirst, BookTitle, Year, ISBN, Approval,  bookcover, description 
+        $favoritesSQL = "SELECT AuthName, BookTitle, Year, ISBN, Approval,  bookcover, description 
                         FROM books_authors, ratings
                         WHERE isbn = isbn2 AND rating = 'like' AND user2 = '".$_SESSION['user']."'";
         $result = mysqli_query($link, $favoritesSQL);
@@ -58,24 +58,25 @@ else{
             //output data of each row
             
             while($row = mysqli_fetch_array($result,MYSQLI_NUM)){
-                $lastName= $row[0] ;
+                 $authName= $row[0] ;
                 
-                $firstName = $row[1];
                 
-                $title = $row[2];
                 
-                $year = $row[3];
+                $title = $row[1];
                 
-                $isbn = $row[4];
+                $year = $row[2];
                 
-                $approval = $row[5];
-                $bookcover = $row[6];
-				$description = $row[7];
+                $isbn = $row[3];
+                
+                $approval = $row[4];
+				$bookcover = $row[5];
+				$description = $row[6];
+                
                 ?>
                 
                 <form id = "buttonForm2" name ="favorites" method = "POST" ><br/>
                 <?php
-                echo  ". <img src=\"".$bookcover ."\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">". $lastName. ", ". $firstName. "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
+                echo  ". <img src=\"".$bookcover ."\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">". $authName . "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
                 Approval Rating: ".$approval." %  Description: " . $description . " "; ?>
                 <button class = "likesButtons" id = "dislikeB" type = "submit" name = "dislike" value = "<?php echo $isbn; ?>" formaction="dislikes.php">  Dislike </button>
                 </form>
