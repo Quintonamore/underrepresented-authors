@@ -1,0 +1,33 @@
+services:
+    web:
+        build: websiteFolder/.
+        volumes:
+            - ./websiteFolder/kioni/:/var/www/html/
+        ports:
+            - "80:80"
+        restart: always
+        environment:
+            DB_USER: root
+            DB_PASSWORD: bipoc1
+            DB_HOST: db
+            DB_PORT: 3306
+
+    db:
+        image: mysql
+        restart: always
+        command: --init-file /data/application/init.sql
+        volumes:
+            - ./websiteFolder/kioni/bipoc_authors_6.sql:/data/application/init.sql
+        environment:
+            MYSQL_ROOT_PASSWORD: bipoc1
+            MYSQL_USER: studentweb1
+            MYSQL_PASSWORD: bipoc1
+            MYSQL_DATABASE: bipoc_authors
+
+    admin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - "8000:80"
+        environment:
+            - PMA_ARBITRARY=1
