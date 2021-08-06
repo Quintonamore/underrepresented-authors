@@ -37,5 +37,6 @@ jobs:
 
       - name: Push To GCR
         run: |
+          gcloud auth configure-docker
           docker tag ua gcr.io/zeta-range-239815/ua
           docker push gcr.io/zeta-range-239815/ua
