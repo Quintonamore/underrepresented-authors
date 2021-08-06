@@ -26,4 +26,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Docker Image
-        run: docker build websiteFolder
+        run: docker build websiteFolder -name ua
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Push To GCR
+        run: |
+          docker tag ua gcr.io/zeta-range-239815/ua
+          docker push gcr.io/zeta-range-239815/ua
