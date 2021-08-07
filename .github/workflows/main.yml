@@ -42,4 +42,4 @@ jobs:
           docker push gcr.io/zeta-range-239815/ua
           
       - name: Restart VM to Use Latest Image
-        run: gcloud compute instances reset ua-instance
+        run: gcloud compute instances reset ua-instance --zone us-west1-c
