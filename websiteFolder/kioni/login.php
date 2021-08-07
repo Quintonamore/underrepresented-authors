@@ -44,8 +44,8 @@ if(isset($_POST['login'])){
 
 
     //if not in databse
-	$row = mysqli_num_rows($sql2);
-    if(count($row) == 0  || !$sql2){
+
+    if((mysqli_num_rows($sql2)==0) || !$sql2){
         echo "
         <p></p>
         <div class = \"message\">
