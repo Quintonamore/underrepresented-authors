@@ -5,12 +5,19 @@ require('db.php');
 if(!isset($_SESSION['darkmode'])){
 
     $_SESSION['darkmode'] = true;
-    header("Location: home.php");
+    ?>
+<script type="text/javascript">
+window.location.href = 'home.php';
+</script>
+<?php
     exit;
 }else{
 	unset($_SESSION['darkmode']);
-	
-	header("Location: home.php");
+	?>
+<script type="text/javascript">
+window.location.href = 'home.php';
+</script>
+<?php
     exit;
 }
 ?>
