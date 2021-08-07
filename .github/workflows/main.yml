@@ -40,3 +40,6 @@ jobs:
           gcloud auth configure-docker
           docker tag ua gcr.io/zeta-range-239815/ua
           docker push gcr.io/zeta-range-239815/ua
+          
+      - name: Restart VM to Use Latest Image
+        run: gcloud compute instances reset ua-instance
