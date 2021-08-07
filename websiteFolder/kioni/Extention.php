@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+
 require('db.php');
 // gets what the xhr sent in string format
 $in = file_get_contents('php://input');

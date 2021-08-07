@@ -56,7 +56,11 @@ if(isset($_POST['login'])){
         
         $_SESSION['user'] = $_POST['user'];
         $_SESSION['inDB'] = true; 
-        header("Location: home.php");
+       ?>
+<script type="text/javascript">
+window.location.href = "home.php";
+</script>
+<?php
         exit; 
     }
     

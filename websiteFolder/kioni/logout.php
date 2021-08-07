@@ -19,4 +19,7 @@ if (ini_get("session.use_cookies")) {
 //end the session
 session_destroy();
 //redirect to regular home page
-header("Location: home.php");
+ ?>
+<script type="text/javascript">
+window.location.href = 'home.php';
+</script>

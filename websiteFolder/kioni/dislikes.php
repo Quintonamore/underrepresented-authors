@@ -11,7 +11,11 @@ require('db.php');
 if(!isset($_SESSION['user'])){
 
     //offer log in or sign up
-    header("Location: error.php");
+     ?>
+<script type="text/javascript">
+window.location.href = 'error.php';
+</script>
+<?php
     exit;
 }
 else{
@@ -128,7 +132,11 @@ else{
         $_SESSION['return'] = "home.php";
         $_SESSION['vistDLike'] = true;
 
-        header("Location:". $_SESSION['return']);
+       ?>
+<script type="text/javascript">
+window.location.href = <?php  $_SESSION['return'] ?>;
+</script>
+<?php
     }
     
     
