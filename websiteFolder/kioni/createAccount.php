@@ -59,7 +59,11 @@ if(isset($_POST['create'])){
     $createAccount = "INSERT INTO accounts VALUES('".$userName."', PASSWORD('".$passWord."'), '".$emailAdd."');";
     $sql4 = @mysqli_query($link, $createAccount);
 
-    header("Location: login.php");
+  ?>
+<script type="text/javascript">
+window.location.href = "login.php";
+</script>
+<?php
     exit; 
     }
 
