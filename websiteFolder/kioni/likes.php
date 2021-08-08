@@ -51,7 +51,7 @@ else{
         if((isset($_SESSION['likeAdded']) && isset($_SESSION['visitLike']))|| (mysqli_num_rows($checkresult)>0)){
                 //if liked before, delete like from ratings table
                 $unlikeSQL = "DELETE FROM ratings WHERE user2 = '". $_SESSION['user']."' AND isbn2 = '".$ISBN."' AND rating = 'like'";
-                echo $unlikeSQL;
+                //echo $unlikeSQL;
                 mysqli_query($link, $unlikeSQL);
                 //unset session variable
                 unset($_SESSION['likeAdded']);
@@ -90,7 +90,7 @@ else{
     $likers = mysqli_query($link, $likeSQL);
     $likeresult = mysqli_fetch_array($likers);
     $numLikes = $likeresult[0];
-    echo $numLikes."</br>";
+    //echo $numLikes."</br>";
 
     //dislikes
     $dissql = "SELECT COUNT(*) 
@@ -99,11 +99,11 @@ else{
     $disrs = mysqli_query($link, $dissql);
     $disresult = mysqli_fetch_array($disrs);
     $numdisLikes= $disresult[0];
-    echo $numdisLikes."</br>";
+   // echo $numdisLikes."</br>";
 
     //add the total 
     $total = $numLikes + $numdisLikes;
-    echo $total."</br>";
+    //echo $total."</br>";
     if($total == 0){
             $approval = 0;
     }
@@ -114,7 +114,7 @@ else{
     
     // decimal to percent
     $likeRate = number_format($approval, 2, '.', '') * 100;
-    echo $likeRate."</br>";
+    //echo $likeRate."</br>";
 
     //update rating in table
     $approvSQL = "UPDATE `books_authors` SET `Approval`='".$likeRate."' WHERE ISBN = ". $ISBN;
@@ -124,11 +124,11 @@ else{
     $_SESSION['return'] = "home.php";
     $_SESSION['visitLike'] = true;
 
-     ?>
-<script type="text/javascript">
-window.location.href = <?php  $_SESSION['return'] ?>;
-</script>
-<?php
+     
+ echo "<script type=\"text/javascript\">
+window.location.href = ' ".  $_SESSION['return'] ." ' ;
+</script>";
+
 }
     
 ?>
