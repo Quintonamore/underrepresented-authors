@@ -59,6 +59,9 @@ if(isset($_POST['create'])){
     $createAccount = "INSERT INTO accounts VALUES('".$userName."', PASSWORD('".$passWord."'), '".$emailAdd."');";
     $sql4 = @mysqli_query($link, $createAccount);
         
+         if(!$link){
+        echo "NO LINK";
+        }
         if($sql4){
         echo "YAY!";
         }
