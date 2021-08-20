@@ -60,10 +60,10 @@ if(isset($_POST['create'])){
         </div>"; 
 
     //if not in databse, add to database and send user to log in page
-    //$createAccount = "INSERT INTO accounts VALUES('".$userName."', PASSWORD('".$passWord."'), '".$emailAdd."');";
-    //$sql4 = @mysqli_query($link, $createAccount);
-    $createAccount =  "SELECT * FROM accounts; ";
+   // $createAccount = "INSERT INTO accounts VALUES('".$userName."',PASSWORD('".$passWord."'), '".$emailAdd."');";
+    $createAccount = "INSERT INTO accounts VALUES('".$userName."','".$passWord."', '".$emailAdd."');";
     $sql4 = @mysqli_query($link, $createAccount);
+   
         echo "after second querry";
          if(!$link){
         echo "NO LINK";
