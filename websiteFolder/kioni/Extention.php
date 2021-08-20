@@ -50,7 +50,7 @@ $query .= ";";
 		echo  '
         <p class=\'book-theme\'>'.$ident2 .'</p><hr><br>
                       <img src=\''.$bookcover .'\' alt=\'cover\' width=\'150\' height=\'230\' class=\'image1\'>
-          <p class=\'title1\'><b>Title:</b> <a href=\''.$booklink. '\' target=\'_blank\'>Some Girls Do</a></p>
+          <p class=\'title1\'><b>Title:</b> <a href=\''.$booklink. '\' target=\'_blank\'>'.$title . '</a></p>
           <p class=\'author1\'><b>By:</b> '.$authName .' </p>
           <p class=\'genre1\'><b>Genre:</b> '.$genre2 .' </p>
           <p class=\'ISBN1\'><b>ISBN-13:</b> '. $isbn.'</p><br><br><br><br>
