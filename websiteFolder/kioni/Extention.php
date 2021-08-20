@@ -47,22 +47,22 @@ $query .= ";";
 			$_SESSION['description'] = $description;
 			$booklink = $row[11];
 		// what will be the this.responcetext 
-		echo  '<p class=\'book-theme\'>'.$ident2 .'</p><hr><br>
-                      <img src= \' '. $bookcover . ' \' alt=\'cover\' width=\'150\' height=\'230\' class=\'image1\'>
-          <p class=\'title1\'><b>Title:</b> <a href=\' ' . $booklink .' \' target=\'_blank\'> '.$title .'</a></p>
-          <p class=\'author1\'><b>By:</b> '. $authName.'</p>
-          <p class=\'genre1\'><b>Genre:</b> '. $genre2.'</p>
-          <p class=\'ISBN1\'><b>ISBN-13:</b> '. $isbn .'</p><br><br><br><br>
+		echo  "<p class='book-theme'>".$ident2 ."</p><hr><br>
+                      <img src= ' ". $bookcover . " ' alt='cover' width='150' height='230' class='image1'>
+          <p class= 'title1'><b>Title:</b> <a href=' " . $booklink ." ' target='_blank'> " .$title ." </a></p>
+          <p class='author1'><b>By:</b> ". $authName."</p>
+          <p class='genre1'><b>Genre:</b> ". $genre2."</p>
+          <p class='ISBN1'><b>ISBN-13:</b> ". $isbn ."</p><br><br><br><br>
 
                       <!--Book Description 1-->
-                      <div class=\'description1\'>
+                      <div class='description1'>
                         <details>
                           <summary><b>Book Description</b></summary>
-                            <div class=\'summary2\'> '. $description.'  </div>
+                            <div class='summary2'> ". $description."  </div>
                         </details>
                       </div>
 
-                      <br><br><br><hr><br>' ;
+                      <br><br><br><hr><br>" ;
 		
 		
 		}
