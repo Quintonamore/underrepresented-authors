@@ -58,7 +58,7 @@ $query .= ";";
                       <div class='description1'>
                         <details>
                           <summary><b>Book Description</b></summary>
-                            <div class='summary2'> ". $row[10] ."
+                            <div class='summary2'> The first season is a mid-season replacement and did not include a full set of episodes. The season had six episodes that began airing from March 24, 2005 to April 26, 2005. The premiere episode was written near word for word from the first episode of the British series, though names and cultural references were changed and some small extra scenes were added. 
                           </div>
                         </details>
                       </div>
