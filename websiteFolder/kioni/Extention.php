@@ -58,8 +58,7 @@ $query .= ";";
                       <div class='description1'>
                         <details>
                           <summary><b>Book Description</b></summary>
-                            <div class='summary2'>
-Morgan, an elite track athlete, is forced to transfer high schools late in her senior year after it turns out being queer is against her private Catholic schools code of conduct. There, she meets Ruby, who has two hobbies: tinkering with her baby blue 1970 Ford Torino and competing in local beauty pageants, the latter to live out the dreams of her overbearing mother. The two are drawn to each other and cant deny their growing feelings. But while Morgan--out and proud, and determined to have a fresh start--doesnt want to have to keep their budding relationship a secret, Ruby isnt ready to come out yet. With each girl on a different path toward living her truth, can they go the distance together?
+                            <div class='summary2'> ". $description. "
                           </div>
                         </details>
                       </div>
