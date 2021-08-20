@@ -58,7 +58,7 @@ $query .= ";";
                       <div class='description1'>
                         <details>
                           <summary><b>Book Description</b></summary>
-                            <div class='summary2'> " . $description . "
+                            <div class='summary2'> the description varible is beakiing this some how " .  $authName  . "
                           </div>
                         </details>
                       </div>
