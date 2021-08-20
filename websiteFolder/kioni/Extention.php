@@ -58,7 +58,7 @@ $query .= ";";
                       <div class='description1'>
                         <details>
                           <summary><b>Book Description</b></summary>
-                            <div class='summary2'> ". $description. "
+                            <div class='summary1'> ". $description. "
                           </div>
                         </details>
                       </div>
