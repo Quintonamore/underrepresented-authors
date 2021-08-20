@@ -74,7 +74,6 @@ if(isset($_POST['create'])){
         }  
         */ 
     }
-/*
 
   ?>
 <script type="text/javascript">
@@ -82,7 +81,7 @@ window.location.href = "login.php";
 </script>
 <?php
     exit; 
-    } */
+    } 
 
     
     
