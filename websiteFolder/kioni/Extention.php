@@ -48,7 +48,7 @@ $query .= ";";
 			$booklink = $row[11];
 		// what will be the this.responcetext 
 		echo  " <p class='book-theme'>LGBTQ+</p><hr><br>
-                      <img src='https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1604597893l/53802072._SX318_.jpg' alt='cover' width='150' height='230' class='image1'>
+                      <img src='". $bookcover ."'  alt='cover' width='150' height='230' class='image1'>
           <p class='title1'><b>Title:</b> <a href='https://www.goodreads.com/book/show/53802072-some-girls-do' target='_blank'>Some Girls Do</a></p>
           <p class='author1'><b>By:</b> Jennifer Dugan</p>
           <p class='genre1'><b>Genre:</b> Romance</p>
