@@ -54,11 +54,15 @@ if(isset($_POST['create'])){
     }
 
     else{
+          echo "
+        <p></p>
+        <div class = \"message\"> the account isnt in the database previously 
+        </div>"; 
 
     //if not in databse, add to database and send user to log in page
     $createAccount = "INSERT INTO accounts VALUES('".$userName."', PASSWORD('".$passWord."'), '".$emailAdd."');";
     $sql4 = @mysqli_query($link, $createAccount);
-        
+        echo "after second querry";
          if(!$link){
         echo "NO LINK";
         }
