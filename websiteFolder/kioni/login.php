@@ -40,7 +40,7 @@ if(isset($_POST['login'])){
     $passW = $_POST['pass']; 
 
    // $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = PASSWORD('" . $passW . "');";
-     $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = '" . $passW . "';";
+     $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = SHA1('" . $passW . "');";
     $sql2 = @mysqli_query($link, $login);
 
 
