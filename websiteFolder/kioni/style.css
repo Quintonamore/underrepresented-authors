@@ -153,6 +153,36 @@
   text-decoration: none;
   display: block;
 }
+h2 {
+  color: black;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+h3{
+  color: black;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+button{
+  background-color: steelblue;
+  color: white;
+  font-size: 16px;
+  font-family: "Courier New", "Lucida", monospace;
+  font-style: normal;
+  padding: 10px 24px;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}
+
+button:hover{
+  background-color: #0E1A40;
+}
+
+#btnVisitWeb, #btnSuggestBook{
+  display: inline-block;
+  margin: 0 auto;
+}
+
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd;}
