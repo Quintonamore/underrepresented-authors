@@ -43,27 +43,28 @@ $query .= ";";
             $_SESSION['approval']=$approval;
 			$bookcover = $row[9];
 			$_SESSION['book-cover'] = $bookcover;
-			$description = $row[10];
+			$description =str_replace('"', "'+String.fromCharCode(34)+'", $row[10]);
 			$_SESSION['description'] = $description;
 			$booklink = $row[11];
 		// what will be the this.responcetext 
-		echo  " <p class='book-theme'>" .$ident2 ."</p><hr><br>
-                      <img src='". $bookcover ."'  alt='cover' width='150' height='230' class='image1'>
-          <p class='title1'><b>Title:</b> <a href='". $booklink."' target='_blank'>".$title."</a></p>
-          <p class='author1'><b>By:</b> ". $authName ."</p>
-          <p class='genre1'><b>Genre:</b>  " .$genre2 ."</p>
-          <p class='ISBN1'><b>ISBN-13:</b> ". $isbn." </p><br><br><br><br>
+		echo  ""?>
+		<p class='book-theme'> <?php echo $ident2; ?> </p><hr><br>
+                      <img src=' <?php echo $bookcover; ?>'  alt='cover' width='150' height='230' class='image1'>
+          <p class='title1'><b>Title:</b> <a href=' <?php echo $booklink; ?>' target='_blank'> <?php echo $title; ?></a></p>
+          <p class='author1'><b>By:</b>  <?php echo $authName; ?></p>
+          <p class='genre1'><b>Genre:</b>  <?php echo $genre2; ?></p>
+          <p class='ISBN1'><b>ISBN-13:</b>  <?php echo $isbn; ?></p><br><br><br><br>
 
                       <!--Book Description 1-->
                       <div class='description1'>
                         <details>
                           <summary><b>Book Description</b></summary>
-                            <div class='summary2'> the description varible is beakiing this some how " .  $authName  . "
+                            <div class='summary2'>  <?php echo $description; ?>
                           </div>
                         </details>
                       </div>
 
-                      <br><br><br><hr><br>" ;
+                      <br><br><br><hr><br> <?php  ;
 		
 		
 		}
