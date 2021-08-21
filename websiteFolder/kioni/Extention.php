@@ -13,7 +13,7 @@ $query = "SELECT * FROM books_authors Where Genre = 'Null'";
 foreach($data2 as $d){
      $query .= "OR Genre LIKE '%" . $d ."%'";
   }
-$query .= "  ;";
+$query .= "  GROUP BY Genre;";
 // sends the query to database 
    $sql = @mysqli_query($link, $query);
 //processes the results 
@@ -43,7 +43,7 @@ $query .= "  ;";
             $_SESSION['approval']=$approval;
 			$bookcover = $row[9];
 			$_SESSION['book-cover'] = $bookcover;
-			$description =str_replace('"', "\"+String.fromCharCode(34)+\"", $row[10]);
+			$description =str_replace('"', "", $row[10]);
 			$_SESSION['description'] = $description;
 			$booklink = $row[11];
 		// what will be the this.responcetext 
