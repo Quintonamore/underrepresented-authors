@@ -65,15 +65,7 @@ if(isset($_POST['create'])){
     $createAccount = "INSERT INTO accounts VALUES('".$userName."',SHA1('".$passWord."'), '".$emailAdd."');";
     $sql4 = @mysqli_query($link, $createAccount);
    
-        /*echo "after second querry";
-         if(!$link){
-        echo "NO LINK";
-        }
-        if($sql4){
-        echo "YAY!";
-        }  
-        */ 
-    }
+
 
   ?>
 <script type="text/javascript">
@@ -84,7 +76,7 @@ window.location.href = "login.php";
     } 
 
     
-    
+} 
 
 
 
