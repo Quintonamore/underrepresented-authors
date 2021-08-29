@@ -4,15 +4,20 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 import time
 
-print("----------------------------------------------------------")
+import pyodbc
 
-# options = ChromeOptions()
-# options.add_argument("--start-maximized")
+print("----------------------------------------------------------")
+count = 100
+conn = pyodbc.connect(driver='{MySQL ODBC 8.0 ANSI Driver}',
+                        server='34.82.68.145:3306',
+                        database='bipoc_authors',
+                        uid='root',pwd='underrepresented-authors-5441-hi-mom')
+
 driver = webdriver.Chrome('./chromedriver')
 driver.maximize_window()
-# driver = webdriver.Chrome(executable_path=chrome_path, options=option)
 driver.implicitly_wait(10)
 driver.get('https://www.bipocbookshelf.com/bipoc-bookshelf')
+
 try:
   time.sleep(2)
   closeCookiesButton = driver.find_element_by_xpath('/html/body/div[2]/span/button/img')
@@ -25,7 +30,7 @@ except WebDriverException as e:
   print(e)
 
 i = 0
-while i < 20:
+while i < 1:
   try:
     button = driver.find_element_by_xpath('//*[@id="comp-k5wr6lz5"]/button')
     # time.sleep(2)
@@ -61,7 +66,9 @@ for x in books:
   author = info[1].get_text()
   print(author)
   pubDate = info[2].get_text()
-  print(pubDate)
+  pubYear = pubDate.split(" ")
+  pubYear = pubYear[2]
+  print(pubYear)
   
   # Go into each book link
   info_link = x.find(class_="_6lnTT").get('href')
@@ -98,5 +105,26 @@ for x in books:
     print("No Bookshop Link")
   
   print("\n")
+
+  sql = """INSERT INTO books_authors(AuthName, BookTitle, Year, Genre, Theme, AuthIdent, Length, ISBN, Approval, bookcover, description, Link) VALUES('{}', '{}', {}, '{}', '{}', '{}', '{}', {}, 0.0,'{}', '{}', '{}')""".format(
+    author, title, pubYear, genres, theme, authID, length, isbn13, cover_link, description, info_link)
+
+  print(sql)
+  cursor = conn.cursor()
+  try:
+    cursor.execute(sql)
+    cursor.execute('SELECT * FROM bipoc_authors.books_authors')
+
+    for row in cursor:
+      print(row)
+    conn.commit()
+  except Exception as e:
+    conn.rollback()
+    print(e)
+
+    cursor.execute('SELECT * FROM bipoc_authors.books_authors')
+
+    for row in cursor:
+      print(row)
 
 driver.quit()
