@@ -49,9 +49,9 @@ else{
     <div class = "space">
         <?php
         //get all the user's liked books
-        $favoritesSQL = "SELECT AuthName, BookTitle, Year, ISBN, Approval,  bookcover, description 
+        $favoritesSQL = "SELECT AuthName, BookTitle, Year, ISBN, Approval,  bookcover, description, books_authors.Bookid
                         FROM books_authors, ratings
-                        WHERE isbn = isbn2 AND rating = 'like' AND user2 = '".$_SESSION['user']."'";
+                        WHERE ratings.bookid = books_authors.Bookid AND rating = 'like' AND user2 = '".$_SESSION['user']."'";
         $result = mysqli_query($link, $favoritesSQL);
 
         if(mysqli_num_rows($result) > 0){
@@ -71,6 +71,7 @@ else{
                 $approval = $row[4];
 				$bookcover = $row[5];
 				$description = $row[6];
+				$bookid = $row[7];
                 
                 ?>
                 
@@ -78,14 +79,16 @@ else{
                 <?php
                 echo  ". <img src=\"".$bookcover ."\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">". $authName . "- \"".$title."\", ".$year. ", ISBN: ".$isbn. "</br> 
                 Approval Rating: ".$approval." %  Description: " . $description . " "; ?>
-                <button class = "likesButtons" id = "dislikeB" type = "submit" name = "dislike" value = "<?php echo $isbn; ?>" formaction="dislikes.php">  Dislike </button>
+                <button class = "likesButtons" id = "dislikeB" type = "submit" name = "dislike" value = "<?php echo $bookid; ?>" formaction="dislikes.php">  Dislike </button>
                 </form>
 
                 <?php
             }
         }
-        else
+        else{
             echo "<div align='center'> Your favorites list is empty! </div>";
+        }
+        $_SESSION['favVisit'] = true; 
             
         ?>
     </div>
