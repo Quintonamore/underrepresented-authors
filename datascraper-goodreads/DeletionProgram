@@ -1,0 +1,41 @@
+#This program connects to the database and allows you to view the data set and delete based on console inputted information
+import pyodbc
+
+conn = pyodbc.connect(driver='{MySQL ODBC 8.0 ANSI Driver}',
+                        server='34.82.68.145:3306',
+                        database='bipoc_authors',
+                        uid='root',pwd='underrepresented-authors-5441-hi-mom')
+cursor = conn.cursor()
+
+running = True
+
+while running:
+    print("Here is the current data set:")
+    cursor.execute('SELECT * FROM bipoc_authors.books_authors')
+    for row in cursor:
+        print(row)
+    print("\n")
+    print("This is a list of the data table variables: AuthName, BookTitle, Year, Genre, Theme, AuthIdent, Length, ISBN, Approval, bookcover, description, Link")
+
+    var = input("Which do you want to delete by?:")
+
+    data = input("what is the data? (If you have multiple, just write them out next to each other separated by only a comma):")
+    data = data.split(",")
+    for i in data:
+        sql = "DELETE FROM books_authors WHERE {}='{}'".format(var, i)
+
+        try:
+            cursor.execute(sql)
+
+            print("Successful deletion")
+        except Exception as e:
+            conn.rollback()
+            print(e)
+    print("Changes completed. Here is the current data set:")
+    cursor.execute('SELECT * FROM bipoc_authors.books_authors')
+
+    for row in cursor:
+        print(row)
+    answer = input("Would you like to delete another data entry? (Y or N): ")
+    if answer.lower() == "n":
+        running = False
