@@ -1,34 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="en" dtr="ltr">
   <head>
-    <style>
-      html,body{
-        text-align: center;
-        width:390px;
-        height:200px;
-      }
-    </style>
-<link rel = "stylesheet" type = "text/css" href = "demoStyles.css">
-    
+    <title>Default Popup Page</title>
+    <link rel = "stylesheet" type = "text/css" href = "demoStyles.css">
   </head>
-
   <body>
-    <h2>Under-represented Authors</h2>
-    <h3>Extension Demo</h3>
-    <hr>
-    <br>
-    <div id="buttons">
-      <form action = "https://www.goodreads.com/" method = "get" target = "_blank">
-        <button type = "submit" id="btnVisitWebsite">Visit Website</button>
-      </form>
+
+    <div class="pop_wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="48" height="48" viewBox="0 0 24 24" stroke-width="2" stroke="#9e9e9e" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+  <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+  <line x1="3" y1="6" x2="3" y2="19" />
+  <line x1="12" y1="6" x2="12" y2="19" />
+  <line x1="21" y1="6" x2="21" y2="19" />
+</svg>
       <br>
-      <!--Have the user type the book's title and author that they want to suggest-->
-          <!--Could also ask for more information on the book from the user-->
-          <!--Also remembers url book was suggested from-->
-        <a href = "book_suggest_page.html"><button id = "btnSuggestBook">Suggest Book</button></a>
+      <h2 class="pop_h2">Under-Represented Authors</h2>
+    <h3 class="pop_h3">Chrome Extension</h3>
+    <hr><br>
 
+    <div class="message">
+      <p class="pop_p">
+        Thank you for using our extension! If you would like a more in-depth explanation of how the extension works, please click the button that says "more info" below. Also, if you would like to visit our website or suggest a book click the corresponding buttons below.
+      </p>
+
+      <div class="buttons" id="btn">
+        <button id="btn-more">More Info</button>
+
+        <form action = "https://ua.quinton.pizza/home.php" method = "get" target = "_blank">
+        <button type = "submit" id="btn-VisitWebsite">Visit Website</button>
+      </form>
+        <a href = "book_suggest_page.html"><button id = "btn-SuggestBook">Suggest Book</button></a>
+      </div>
+      </div>
     </div>
-    <script src="demo.js"></script>
-  </body>
 
+  </body>
+  <script src="demo.js"></script>
 </html>

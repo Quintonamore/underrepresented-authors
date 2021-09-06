@@ -1,11 +1,5 @@
-//checks if loaded page says "books", "library", or any genera of book
-  //can change to be only certain urls
-  //don't want to run on things like google docs
-
-//Working on causing this to trigger popup
-
 const wordList = ['fiction', 'non-fiction', 'nonfiction', 'comedy', 'drama', 'fantasy', 'horror',
-'mystery', 'romance', 'thriller', 'sci fi', 'sci-fi', 'action'];
+'mystery', 'romance', 'thriller', 'sci fi', 'sci-fi', 'action', 'autobiography', 'biography'];
 
 const bookRecs = [];
 
@@ -34,104 +28,80 @@ try {
     "action" doesn't always reference the genre
       if statement catches that
   */
-  if(bookRecs.length > 0 && !(bookRecs.length == 1 && bookRecs.includes("action"))) {
+  if(!(bookRecs.length == 1 && bookRecs.includes("action")) && bookRecs.length > 0) {
     //alert('We have book recommendation for you!\nPlease click the under represented authors extension to see them!');
 
     chrome.runtime.sendMessage({bookRecs});
+  	// turns the bookRecs array into a json format we can send with xhr to the php file
+  	var jsonString = JSON.stringify(bookRecs);
+  	// turns the bookRecs array into a json format we can send with xhr to the php file
+  	var jsonString = JSON.stringify(bookRecs);
 
 
+  	/* sends the array of genres we found to a php file that does a query on the database and returns a responce */
+  	const xhr = new XMLHttpRequest();
+  	/* after the request is loaded it executes this code which creates the popup,
+  	the this.repsoncetext is the books the database found that matches the genre list*/
 
-    /*Adds html for book recommendation popup to current page */
 
-    var elem = document.createElement('div');
-    elem.id = 'popup_id';
-    var shadowRoot = elem.attachShadow({mode: 'open'});
-    shadowRoot.innerHTML = `
-    <div class="recom-pop" id="recom-pop">
-      <input type="button" value="&times;" id="close-btn" class="close-btn"
-      onclick="function closepop(){
-        document.getElementById('recom-pop').style.display = 'none';
-      } closepop();">
+  	xhr.onload = function(){
+      var cid = chrome.runtime.id;
 
-      <h2 class="pop_h2">Book Recommendations</h2>
-      <h3 class="pop_h3">Demo</h3>
-      <hr>
-      <br>
+      //Makes div to put iframe in
+      var elem = document.createElement('div');
+      elem.id = "draggable_frame";
 
-      <!--Content of popup-->
-      <div class="book-theme">
-        <h3>LGBTQ+</h3>
-        <div class="vertical-menu">
-          <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1604597893l/53802072._SX318_.jpg" alt="Some Girls Do (Cover)" width="200" height="330" class="image1">
-          <p class = "title">Title: <a href="https://www.goodreads.com/book/show/53802072-some-girls-do" target = "_blank">Some Girls Do</a></p>
-          <p class = "author">By: Jennifer Dugan</p>
-          <p class = "genre">Genre: Romance</p>
-          <p class = "ISBN">ISBN-13: 9780593112533</p>
-          <br>
-          <img src = "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1601312585l/53180089.jpg" alt = "Meet Cute Diary (Cover)" width= "200" height="330" class="image2">
-          <p class = "title">Title: <a href="https://www.goodreads.com/book/show/53180089-meet-cute-diary" target = "_blank">Meet Cute Diary</a></p>
-          <p class = "author">By: Emery Lee</p>
-          <p class = "genre">Genre: Romance</p>
-          <p class = "ISBN">ISBN-13: 9780063038837</p>
-        </div>
-      </div>
-      <style>
-        /*Style for whole popup*/
-        .recom-pop{
-          text-align: center;
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          background-color: white;
-          border: 1px solid black;
-          border-radius: 10px;
-          z-index: 10000;
-          font-family: "Times New Roman", Times, serif;
+      //Makes Iframe
+      var iframe = document.createElement('iframe');
+      iframe.id = "iframe_for_pop";
+      iframe.class = "iframe_for_pop_class";
+      iframe.name = "frame";
+      iframe.scrolling = "no";
+      iframe.frameBorder = "0";
+      iframe.src = "chrome-extension://" + cid + "/recommend.html";
+      iframe.setAttribute("style", "width:450px; height:65px; position: absolute; top:3rem; right:1rem; z-index:100000;text-align:center; margin:0; padding:0; overflow:hidden; border-radius: 5px;");
 
+      elem.appendChild(iframe);
+      document.body.appendChild(elem);
+
+      //Listens for messages from scrips
+      addEventListener("message", function(event){
+        //Makes sure message is from correct origin
+        if(event.origin == 'chrome-extension://' + cid){
+          //checks if message is from close button
+          //  if it is iframe closes on click
+          if(event.data == "my-close-btn"){
+            var div = parent.document.getElementById('draggable_frame');
+            div.remove();
+          }
+
+          //checks if message is from checkbox
+          //  if it is and the message is true iframe height is set to 590px
+          //  otherwise the iframe height is set to 65px
+          const frame = document.getElementById('iframe_for_pop');
+          if(event.data == true){
+            frame.style.height = '590px';
+          } else if(event.data == false) {
+            frame.style.height = '65px';
+          }
         }
+      })
 
-        .pop_h2{
-          font-family: "Times New Roman", Times, serif;
-        }
+      //Sends requested database info to the popup's script (recommend.js)
+      const mes = this.responseText;
+      var frame = document.getElementById('iframe_for_pop');
+      window.addEventListener('load', (event) => {
+        frame.contentWindow.postMessage(mes, 'chrome-extension://' + cid);
+      });
 
-        .pop_h3{
-          font-family: "Times New Roman", Times, serif;
-        }
-
-        /*Scroll wheel for popup*/
-        .vertical-menu{
-          width: 400px;
-          height: 550px;
-          overflow-y: auto;
-        }
-
-        .close-btn {
-          border: .6px solid white;
-          padding: 10px;
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          font-size: 1rem;
-          cursor: pointer;
-          transition: .5s;
-        }
-
-        .close-btn:hover{
-          background: steelblue;
-        }
-
-      </style>
-    </div>
-    `;
-
-    document.body.appendChild(shadowRoot);
-
-    chrome.runtime.sendMessage({bookRecs});
-
-    //Change content of page to html
+  	};
+  	// the file we are sending to edit if you use a diffrent port for your mysql sever default option is http://localhost/
+    xhr.open("POST", "https://ua.quinton.pizza/Extention.php");
+	  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  	// the array we are sending which is a json string version of bookrecs
+  	xhr.send( jsonString);
 
   }
-
 
 } catch (err) { //catches any errors
   console.log(err);

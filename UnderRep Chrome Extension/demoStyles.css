@@ -1,29 +1,73 @@
-h2 {
-  color: black;
-  font-family: "Lucida Console", "Courier New", monospace;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+
+.pop_wrapper{
+  text-align: center;
+  width: 500px;
+  height: 400px;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 7px;
+  outline: 30px solid #946B2D
 }
 
-h3{
-  color: black;
-  font-family: "Lucida Console", "Courier New", monospace;
+.pop_h2, .pop_h3{
+  color: #946B2D;
 }
 
-button{
-  background-color: steelblue;
-  color: white;
-  font-size: 16px;
-  font-family: "Courier New", "Lucida", monospace;
-  font-style: normal;
-  padding: 10px 24px;
-  border-radius: 8px;
-  transition-duration: 0.4s;
+.pop_p{
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 15px;
 }
 
-button:hover{
-  background-color: #0E1A40;
+#btn-more{
+  width: 30%;
+  height: 45px;
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 0px;
+  background: #946B2D;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  outline:none;
 }
 
-#btnVisitWeb, #btnSuggestBook{
-  display: inline-block;
-  margin: 0 auto;
+#btn-VisitWebsite{
+  width: 230px;
+  height: 45px;
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 0px;
+  background: #946B2D;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  outline:none;
+
+  position: absolute;
+  bottom: 1.5em;
+  left: 1.5em;
+}
+
+#btn-SuggestBook{
+  width: 230px;
+  height: 45px;
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 0px;
+  background: #946B2D;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  outline:none;
+
+  position: absolute;
+  bottom: 1.5em;
+  left: 17.5em;
+}
+
+
+#btn-more:hover, #btn-VisitWebsite:hover, #btn-SuggestBook:hover{
+  background:#ac7c34;
 }

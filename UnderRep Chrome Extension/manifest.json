@@ -24,14 +24,15 @@
     {
       //need to change to certain urls (also exclude our own website)
       "matches": ["<all_urls>"],
-      "exclude_matches": ["*://*.youtube.com/*", "*://*.google.com/*", "*://www.w3schools.com/*", "*://*/*movie*", "*://*/*movies*", "*://*.netflix.com/*", "*://*/*show*", "*://*/*shows*", "*://*.stackoverflow.com/*"],
+      "exclude_matches": ["*://*.youtube.com/*", "*://*.google.com/*", "*://www.w3schools.com/*", "*://*/*movie*", "*://*/*movies*", "*://*.netflix.com/*", "*://*/*shows*", "*://*.stackoverflow.com/*", "http://34.82.68.145/home.php?", "https://ua.quinton.pizza/home.php", "https://ua.quinton.pizza/*.php?"],
       "js": ["content.js"],
       "css": ["demoStyles.css"]
     }
   ],
 
   "web_accessible_resources": [{
-    "resources": ["recommend.html", "recommend.js", "recommendStyle.css"],
+    "resources": ["recommend.html", "recommend.js", "recommendStyle.css", "scriptInjector.js"],
+    "matches": [ "<all_urls>" ],
     "use_dynamic_url": true
     }],
 
@@ -41,7 +42,5 @@
     "default_icon": "icon128.png"
 
   }
-
-  //try web thing again but with recommend.html
 
 }

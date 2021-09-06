@@ -1,129 +1,182 @@
 <!DOCTYPE html>
-<html lang = "en" dtr = "ltr">
-<head>
-  <style>
-    html, body {
-      text-align: center;
-      width:390px;
-      height:380px;
-    }
-  </style>
-  <link rel = "stylesheet" type = "text/css" href = "book_suggest_page_styles.css">
-  <title>Test</title>
-</head>
-<body>
-  <h2>Suggest a Book!</h2>
+<html lang= "en" dtr="ltr">
+  <head>
+    <link rel="stylesheet" type="text/css" href="book_suggest_page_styles.css">
+    <title>Book Suggestion Form</title>
+  </head>
 
-  <!--Back button-->
-  <a href = "demo.html" class = "previous">&#8249;</a>
+  <body class="form">
+   <div class="surv_wrapper">
+    <!--Back button-->
+    <a href="demo.html" class="previous">&#8249;</a>
+     <br>
 
-  <br>
-  <hr>
-  <!--Need to customize required message-->
-  <!--Need to work on css design-->
-  <form id = "sheetdb-form" atuocomplete = "off" action = "https://sheetdb.io/api/v1/qug94x9fqzesa" method = "POST">
-    <div class = "book-info">
-      <div class = "left-side">
-
-        <!--Left side of popup asking user for title, author, isbn, and a description of suggested book-->
-        <label for = "bookTitle">Title:</label><br>
-        <input type = "text" id = "bookTitle" name= "data[Title:]" autocomplete = "off" required></input><br><br>
-
-        <label for = "bookAuthor">Author:</label><br>
-        <input type = "text" id = "bookAuthor" name= "data[Author:]" autocomplete = "off" required></input><br><br>
-
-        <!--Need to code so this inputs are the correct length-->
-
-        <!--Need to fix max length it isn't working-->
-        <label for = "bookISBN-10">ISBN-10:</label><br>
-        <input type="text" pattern="[0-9]{10}" id = "bookISBN-10" name= "data[ISBN-10:]" autocomplete = "off"></input><br>
-
-        <label for="bookISBN-13">ISBN-13:</label><br>
-        <input type="text" pattern="[0-9]{13}" id = "bookISBN-13" name= "data[ISBN-13:]" autocomplete = "off"></input><br><br>
+    <h2 class="h2-title">Book Suggestion Form <i class="fas fa-marker"></i></h2>
+     <p class="text"><p>
 
 
+    <hr>
+    <br>
 
-        <label for = "bookDes">Description:</label><br>
-        <textarea id = "bookDes" name = "data[Description:]" row = "10" cols = "16"></textarea>
+    <!--From Info Section-->
+    <form action="saveForm.php" method="POST" id="form-info" autocomplete="off">
+      <!--Quick Note-->
+      <p><b>Note:</b> We only accept books by someone from an underrepresented group or about an underrepresented group.</p><br><br>
+        <!--First half asking for basic book info-->
+        <label for="bookTitle">* Title:</label>
+        <input type="text" id="bookTitle" autocomplete="off" name= "data[Title:]"></input><br>
+      <span class="form__error" id="title--error">Please enter the book's title.</span>
+      <br><br>
 
+       <label for="bookAuthor">* Author:</label>
+        <input type="text" id="bookAuthor" autocomplete="off" placeholder="FristName LastName" name= "data[Author:]"></input><br>
+     <span class="form__error" id="author--error">Please enter the author's first and last name.</span>
+     <br><br>
+
+
+    <!--Book ISBN-->
+     <label for="bookISBN-13">ISBN-13:</label>
+    <input type="text" id="bookISBN-13" autocomplete="off" name="data[ISBN-13:]"></input><br>
+    <span class="form__error" id="isbn-error">ISBN must be 13 digits long.</span>
+    <br><br>
+
+
+  <!--Book Length-->
+  <div class="length-select">
+        Book Length:
+        <select class="length-sel" id="length-sel" class="sel" name="data[Book Length:]">
+          <option value="">Unknown</option>
+          <option value="Novel">Novel</option>
+          <option value="Poem">Poem</option>
+          <option value="Short Story">Short Story</option>
+
+        </select>
+      </div> <br> <br>
+
+  <!--Genres-->
+  <div class="genres">
+    <label>Genre(s):</label>
+    <ul>
+
+      <li>
+        <input type="checkbox" id="genre1" name="data[Autobiography:]" value="autobiography"></input>
+        <label for="genre1" class="check-word">Autobiography</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+    <li>
+        <input type="checkbox" id="genre2" name="data[Biography:]" value="biography"></input>
+        <label for="genre2" class="check-word">Biography</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+     <li>
+        <input type="checkbox" id="genre3" name="data[Fiction:]" value="fiction"></input>
+        <label for="genre3" class="check-word">Fiction</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre4" name="data[Sci-Fi:]" value="sci-fi"></input>
+        <label for="genre4" class="check-word">Sci-Fi</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre5" name="data[Fantasy:]" value="fantasy"></input>
+        <label for="genre5" class="check-word">Fantasy</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre6" name="data[Mystery:]" value="mystery"></input>
+        <label for="genre6" class="check-word">Mystery</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre7" name="data[Thriller:]" value="thriller"></input>
+        <label for="genre7" class="check-word">Thriller</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre8" name="data[Romance:]" value="romance"></input>
+        <label for="genre8" class="check-word">Romance</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+    </ul>
+  </div>
+
+      <!--Book Theme-->
+      <div class="theme-select">
+        * Book Theme:
+          <select id="theme-sel" name="data[Book Theme:]">
+          <option value="">-----</option>
+          <option value="BIPOC">BIPOC</option>
+          <option value="LGBTQ+">LGBTQ+</option>
+          <option value="Neurodivergent">Neurodivergent</option>
+          <option value="Women">Women</option>
+          <option value="Family">Family</option>
+
+        </select><br>
+          <span class="form__error" id="theme--error">Please select the book's theme.</span>
       </div>
 
-      <div class = "genres">
-        <!--Right side of popup asking for the book's genre(s)-->
+      <br><br>
+
+      <!--Author Identity-->
+      <div class="author-id">
+        <label>Author Identity:</label>
         <ul>
-          <label for = "genre">Genre(s):</label>
           <li>
-            <input type="checkbox" id="genre1" name="data[Fiction:]" value="true">
-            <label for="genre1"> Fiction</label><br><br>
-            <span class = "checkmark"></span>
-          </li>
+        <input type="checkbox" id="id1" class="checkboxes" name="data[BIPOC:]" value="BIPOC"></input>
+        <label for="id1" class="check-word">BIPOC</label><br><br>
+        <span class="checkmark"></span>
+      </li>
 
-          <li>
-            <input type="checkbox" id="genre2" name="data[Non-fiction:]" value="true">
-            <label for="genre2"> Non-Fiction</label><br><br>
-            <span class = "checkmark"></span>
-          </li>
+    <li>
+        <input type="checkbox" id="id2" class="checkboxes" name="data[LGBTQ+:]" value="LGBTQ+"></input>
+        <label for="id2" class="check-word">LGBTQ+</label><br><br>
+        <span class="checkmark"></span>
+      </li>
 
+     <li>
+        <input type="checkbox" id="id3" class="checkboxes" name="data[Neurodivergent:]" value="Neurodivergent"></input>
+        <label for="id3" class="check-word">Neurodivergent</label><br><br>
+        <span class="checkmark"></span>
+      </li>
 
-          <li>
-            <input type="checkbox" id="genre3" name="data[Comedy:]" value="true">
-            <label for="genre3"> Comedy</label><br><br>
-            <span class = "checkmark"></span>
-          </li>
-
-          <li>
-            <input type="checkbox" id="genre4" name="data[Drama:]" value="true">
-            <label for="genre4"> Drama</label><br><br>
-            <span class = "checkmark"></span>
-          </li>
-
-          <li>
-            <input type="checkbox" id="genre5" name="data[Thriller:]" value="true">
-            <label for="genre5"> Thriller</label><br><br>
-            <span class = "checkmark"></span>
-          </li>
-
-          <br>
-
-          <li>
-            <input type="checkbox" id="genre6" name="data[Mystery:]" value="true">
-            <label for="genre6"> Mystery</label><br><br>
-            <span class = "checkmark"></span>
-          </li>
-
-          <li>
-            <input type="checkbox" id="genre7" name="data[Romance:]" value="true">
-            <label for="genre7"> Romance</label><br><br>
-            <span class = "checkbox"></span>
-          </li>
-
-          <li>
-            <input type="checkbox" id="genre8" name="data[Fantasy:]" value="true">
-            <label for="genre8"> Fantasy</label><br><br>
-            <span class = "checkbox"></span>
-          </li>
-
-
-          <li>
-            <input type="checkbox" id="genre9" name="data[Sci-fi:]" value="true">
-            <label for="genre9"> Sci-Fi</label><br><br>
-            <span class = "checkbox"></span>
-          </li>
-
-          <li>
-            <input type="checkbox" id="genre10" name="data[Action:]" value="true">
-            <label for="genre10"> Action</label>
-            <span class = "checkbox"></span>
-          </li>
-
+      <li>
+        <input type="checkbox" id="id4" class="checkboxes" name="data[Women:]" value="Woman"></input>
+        <label for="id4" class="check-word">Woman</label><br><br>
+        <span class="checkmark"></span>
+      </li>
         </ul>
-
       </div>
-      <!--Submit button-->
-      <button type = "submit" id= "Sub">Submit</button>
-    </div>
-  </form>
-  <script src = "book_suggest_page.js"></script>
-</body>
 
+      <!--Book Description-->
+      <label for="bookDes">Book Description:</label>
+      <textarea id="bookDes" name="data[Description:]"></textarea><br><br>
+
+        <!--Link to Book-->
+      <label for="book-link">Link to book:</label>
+        <input type="url" id="book-link" name="data[Book Link:]" autocomplete="off" placeholder="https://www.goodreads.com/en/book/show/53802072-some-girls-do"></input><br><br>
+
+      <!--Link to Image-->
+      <label for="image-link">Cover Image Link:</label>
+        <input type="text" id="image-link" name="data[Image Link:]" autocomplete="off"></input><br><br>
+
+
+    <!--required-->
+    <p class="req">* required</p>
+    <br>
+
+    <!--Submit button-->
+    <input type="submit" id="sub" class="sub"></input>
+  </form>
+</div>
+  <script src = "book_suggest_page.js"></script>
+  <script src="https://kit.fontawesome.com/eec7e91fd0.js" crossorigin="anonymous"></script>
+</body>
 </html>
