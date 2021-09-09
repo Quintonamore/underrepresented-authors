@@ -40,7 +40,7 @@ if(isset($_POST['login'])){
     $passW = $_POST['pass']; 
 
     //check if the user is in accounts table
-    $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = PASSWORD('".$passW."'); ";
+    $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = SHA1('" . $passW . "'); ";
     $sql2 = @mysqli_query($link, $login);
     //echo $login;
 
@@ -62,7 +62,7 @@ if(isset($_POST['login'])){
     }
     else{
         //check in admin
-        $login2 = "SELECT * FROM admins WHERE username = '". $user . "'" . "AND password = PASSWORD('".$passW."'); ";
+        $login2 = "SELECT * FROM admins WHERE username = '". $user . "'" . "AND password = SHA1('" . $passW . "'); ";
         $sql3 = @mysqli_query($link, $login2);
 
         //if yes admin
