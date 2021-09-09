@@ -28,37 +28,70 @@ jQuery Ajax CDN
 
     unset($_SESSION['favVisit']);
 
-    if (isset($_SESSION['inDB']) && isset($_SESSION['user']) && $_SESSION['inDB']) {
+    //for regular user
+    if (isset($_SESSION['inDB']) && isset($_SESSION['user']) && $_SESSION['inDB'] && isset($_SESSION['regUser'])) {
         echo "<div class='dropdown'> <button class='dropbtn'>" . $_SESSION['user'] . "</button> <div class='dropdown-content'>
-    <a href='favorites.php'>My Favorites</a>
-    <a href='logout.php'>Logout</a>
-	<a href='darkmode.php'>Dark Mode </a>
-  </div>
-</div> ";
-    } else {
-        echo "<div class='dropdown'> <button class='dropbtn'>Account</button> <div class='dropdown-content'>
-    <a href='login.php'>Log In</a>
-    <a href='createAccount.php'>Sign Up</a>
-	<a href='darkmode.php'>Dark Mode </a>
-  </div>
-</div> ";
+        <a href='favorites.php'>My Favorites</a>
+        <a href='logout.php'>Logout</a>
+        <a href='darkmode.php'>Dark Mode </a>
+        </div>
+        </div> ";   
+    } 
+    else{
+        //for admin
+        if (isset($_SESSION['inDB']) && isset($_SESSION['user']) && $_SESSION['inDB'] && isset($_SESSION['adminUser'])) {
+            echo "<div class='dropdown'> <button class='dropbtn'>" . $_SESSION['user'] . "</button> <div class='dropdown-content'>
+            <a href='review.php'>Review Suggestions</a>
+            <a href='favorites.php'>My Favorites</a>
+            <a href='logout.php'>Logout</a>
+            <a href='darkmode.php'>Dark Mode </a>
+            </div>
+            </div> ";   
+        } 
+        else {
+            echo "<div class='dropdown'> <button class='dropbtn'>Account</button> <div class='dropdown-content'>
+            <a href='login.php'>Log In</a>
+            <a href='createAccount.php'>Sign Up</a>
+            <a href='darkmode.php'>Dark Mode </a>
+            </div>
+            </div> ";
+        }
+
     }
+    
     ?>
 
     <!-- Begin Webpage -->
     <div class="title">
         Title
     </div>
-    <div class="buttonArea">
-        <a href="home.php" class="button">Home</a>
-        <a href="bestSellers.php" class="button">Our Best-Sellers</a>
-        <a href="tutorial.php" class="button">Tutorial</a>
-        <a href="about.php" class="button">About Us</a>
-    </div>
+    <?php
+    //if reg user 
+    if(isset($_SESSION['regUser'])){
+        echo "<div class=\"buttonArea\">
+        <a href=\"home.php\" class=\"button\">Home</a>
+        <a href=\"bestSellers.php\" class=\"button\">Our Best-Sellers</a>
+        <a href=\"suggestedbook.php\" class=\"button\">Suggest A Book</a>
+        <a href=\"tutorial.php\" class=\"button\">Tutorial</a>
+        <a href=\"about.php\" class=\"button\">About Us</a>
+        </div>";
+    }
+    else{
+
+        echo "<div class=\"buttonArea\">
+        <a href=\"home.php\" class=\"button\">Home</a>
+        <a href=\"bestSellers.php\" class=\"button\">Our Best-Sellers</a>
+        <a href=\"tutorial.php\" class=\"button\">Tutorial</a>
+        <a href=\"about.php\" class=\"button\">About Us</a>
+        </div>";
+    }
+    ?>
+    
     <div class="text">
         <form id="form" action="" method="post">
             <label> Genre
                 <fieldset>
+				
                     <input type="checkbox" name="genre[]" value="Any">Any<br>
                     <input type="checkbox" name="genre[]" value="Biography">Biography<br>
                     <input type="checkbox" name="genre[]" value="Autobiography">Autobiography<br>
@@ -68,6 +101,18 @@ jQuery Ajax CDN
                     <input type="checkbox" name="genre[]" value="Mystery">Mystery<br>
                     <input type="checkbox" name="genre[]" value="Thriller">Thriller<br>
                     <input type="checkbox" name="genre[]" value="Romance">Romance<br>
+					<div id="list1" class="dropdown-check-list" tabindex="100">
+					<span class="anchor">More options</span>
+					<ul class="items">
+						<li><input type="checkbox"  name="genre[]" value="Action" />Action </li>
+						<li><input type="checkbox"  name="genre[]" value="Adventure" />Adventure</li>
+						<li><input type="checkbox"  name="genre[]" value="Comedy" />Comedy </li>
+						<li><input type="checkbox"  name="genre[]" value="Historical fiction" />Historical fiction </li>
+						<li><input type="checkbox"  name="genre[]" value="Young Adult" />Young Adult </li>
+						<li><input type="checkbox"   name="genre[]" value="Comic" />Comic </li>
+						<li><input type="checkbox"  name="genre[]" value="Nonfiction" />Nonfiction</li>
+					  </ul>
+					</div>
 
                 </fieldset>
             </label>
@@ -79,6 +124,7 @@ jQuery Ajax CDN
                     <input type="checkbox" name="theme[]" value="Neurodivergent">Neurodivergent<br>
                     <input type="checkbox" name="theme[]" value="Women">Women<br>
                     <input type="checkbox" name="theme[]" value="Family">Family<br>
+					<input type="checkbox" name="ident[]" value="Disabled">Disabled<br>
                 </fieldset>
             </label>
             <label> Author identity
@@ -87,15 +133,18 @@ jQuery Ajax CDN
                     <input type="checkbox" name="ident[]" value="BIPOC">BIPOC<br>
                     <input type="checkbox" name="ident[]" value="LGBTQ+">LGBTQ+<br>
                     <input type="checkbox" name="ident[]" value="Neurodivergent">Neurodivergent<br>
-                    <input type="checkbox" name="ident[]" value="Woman">Woman<br>
+                    <input type="checkbox" name="ident[]" value="Woman">Women<br>
+					<input type="checkbox" name="ident[]" value="Disabled">Disabled<br>
                 </fieldset>
             </label>
             <label> Length
                 <fieldset>
                     <input type="checkbox" name="length[]" value="Any">Any<br>
                     <input type="checkbox" name="length[]" value="Novel">Novel<br>
+					<input type="checkbox" name="length[]" value="Novella">Novella<br>
+					<input type="checkbox" name="length[]" value="Short Story">Short Story<br>
                     <input type="checkbox" name="length[]" value="Poem">Poem<br>
-                    <input type="checkbox" name="length[]" value="Short Story">Short Story<br>
+                    
                 </fieldset>
             </label>
             <label>Author's Name (FirstName LastName)
@@ -307,7 +356,7 @@ jQuery Ajax CDN
                     }
                 }
                 $query .= ";";
-                echo "Submit:" .$query;
+                //echo "Submit:" .$query;
 
                 $sql = @mysqli_query($link, $query);
 
@@ -454,7 +503,7 @@ jQuery Ajax CDN
                     }
                 }
                 $query .= ";";
-                echo "Return: ". $query;
+                //echo "Return: ". $query;
 
                 $sql = @mysqli_query($link, $query);
 
@@ -539,6 +588,15 @@ jQuery Ajax CDN
             $text.appendTo("#space")
         });
     </script>
+	<script>
+var checkList = document.getElementById('list1');
+checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+  if (checkList.classList.contains('visible'))
+    checkList.classList.remove('visible');
+  else
+    checkList.classList.add('visible');
+}
+</script>
 </body>
 
 </html>

@@ -13,7 +13,7 @@ $query = "SELECT * FROM books_authors Where Genre = 'Null'";
 foreach($data2 as $d){
      $query .= "OR Genre LIKE '%" . $d ."%'";
   }
-$query .= ";";
+$query .= "  GROUP BY Genre;";
 // sends the query to database 
    $sql = @mysqli_query($link, $query);
 //processes the results 

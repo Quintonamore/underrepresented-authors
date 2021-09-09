@@ -39,34 +39,59 @@ if(isset($_POST['login'])){
     $user = $_POST['user'];
     $passW = $_POST['pass']; 
 
-   // $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = PASSWORD('" . $passW . "');";
-     $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = SHA1('" . $passW . "');";
+    //check if the user is in accounts table
+    $login = "SELECT * FROM accounts WHERE username = '". $user . "'" . "AND password = PASSWORD('".$passW."'); ";
     $sql2 = @mysqli_query($link, $login);
+    //echo $login;
 
 
-    //if not in databse
-
-    if(!$sql2 || (mysqli_num_rows($sql2)==0)){
-        echo "
-        <p></p>
-        <div class = \"message\">
-        Please enter a valid username and password. If you would like to create an account, click here: 
-        <form action = \"createAccount.php\" method = \"post\" >
-        <input type = 'submit' name = 'create1' value = 'Create Account' class=\"accountButton\"> 
-        </form>
-        </div>"; 
-    }
-    else{
-        
+    //if in accounts table
+    if((mysqli_num_rows($sql2)>0)){
+        $_SESSION['regUser'] = true; 
         $_SESSION['user'] = $_POST['user'];
         $_SESSION['inDB'] = true; 
-       ?>
-<script type="text/javascript">
-window.location.href = "home.php";
-</script>
-<?php
-        exit; 
+
+        //echo "USER";
+        
+        ?>
+        <script type="text/javascript">
+        window.location.href = "home.php";
+        </script>
+        <?php
+        exit;   
     }
+    else{
+        //check in admin
+        $login2 = "SELECT * FROM admins WHERE username = '". $user . "'" . "AND password = PASSWORD('".$passW."'); ";
+        $sql3 = @mysqli_query($link, $login2);
+
+        //if yes admin
+        if((mysqli_num_rows($sql3)>0)){
+            $_SESSION['adminUser'] = true; 
+            $_SESSION['user'] = $_POST['user'];
+            $_SESSION['inDB'] = true; 
+            //echo "ADMIN";
+            
+            ?>
+            <script type="text/javascript">
+            window.location.href = "home.php";
+            </script>
+            <?php
+            exit;  
+        }
+        //not an admin (or any other account)
+        else{
+            echo "
+            <p></p>
+            <div class = \"message\">
+            Please enter a valid username and password. If you would like to create an account, click here: 
+            <input type = 'submit' name = 'create' value = 'Create Account' action = 'createAccount.php'> 
+            </div>";
+        }
+
+             
+    }
+    
     
 }
 

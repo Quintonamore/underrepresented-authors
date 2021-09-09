@@ -19,17 +19,18 @@ window.location.href = 'error.php';
     exit;
 }
 else{
-   
-    $ISBN = $_POST['like'];
+   // we used to use ISBN for this but due to not all entries having that we switched to bookid. i just didnt feel like changing all these variable names 
+   // so $ISBN here  = Bookid
+    $bookID = $_POST['like'];
 
     /**FIRST LIKE  */
     //if no row exists with user and isbn, add to ratings with like
     //and update database 
-    $checkIfLike = "SELECT * FROM ratings WHERE isbn2 = '". $ISBN. "' AND user2 = '".$_SESSION['user']."'";
+    $checkIfLike = "SELECT * FROM ratings WHERE bookid = '". $bookID. "' AND user2 = '".$_SESSION['user']."'";
     $checkresult2 = mysqli_query($link, $checkIfLike);
     if(mysqli_num_rows($checkresult2)==0){
         $likeSQLIn = "INSERT INTO ratings 
-                        VALUES ('". $_SESSION['user']."', '". $ISBN . "', 'like')";
+                        VALUES ('". $_SESSION['user']."', '". $bookID . "', 'like')";
         //echo $likeSQLIn;
         mysqli_query($link, $likeSQLIn);
 
@@ -44,13 +45,13 @@ else{
         // check database for isbn and 'like'
         /*********UNLIKE********/
         
-        $checkLike = "SELECT * FROM ratings WHERE isbn2 = '". $ISBN. "' AND user2 = '".$_SESSION['user']."' AND rating = 'like'";
+        $checkLike = "SELECT * FROM ratings WHERE bookid = '". $bookID. "' AND user2 = '".$_SESSION['user']."' AND rating = 'like'";
         //echo $checkLike;
         $checkresult = mysqli_query($link, $checkLike);
         //echo ;
         if((isset($_SESSION['likeAdded']) && isset($_SESSION['visitLike']))|| (mysqli_num_rows($checkresult)>0)){
                 //if liked before, delete like from ratings table
-                $unlikeSQL = "DELETE FROM ratings WHERE user2 = '". $_SESSION['user']."' AND isbn2 = '".$ISBN."' AND rating = 'like'";
+                $unlikeSQL = "DELETE FROM ratings WHERE user2 = '". $_SESSION['user']."' AND bookid = '".$bookID."' AND rating = 'like'";
                 //echo $unlikeSQL;
                 mysqli_query($link, $unlikeSQL);
                 //unset session variable
@@ -62,12 +63,12 @@ else{
 
         //if liked, but disliked before change dislike to like
         /*DISLIKE TO LIKE *******/
-        $checkDislike = "SELECT * FROM ratings WHERE isbn2 = '". $ISBN. "' AND user2 = '".$_SESSION['user']."' AND rating = 'dislike'";
+        $checkDislike = "SELECT * FROM ratings WHERE bookid = '". $bookID. "' AND user2 = '".$_SESSION['user']."' AND rating = 'dislike'";
         //echo $checkDislike;
         $checkresultD = mysqli_query($link, $checkDislike);
         if(mysqli_num_rows($checkresultD)>0){
                 //change like to dislike
-                $like2SQL = "UPDATE `ratings` SET `rating`='like' WHERE `user2`='".$_SESSION['user']."' AND `isbn2`='". $ISBN."' AND `rating`='dislike'";
+                $like2SQL = "UPDATE `ratings` SET `rating`='like' WHERE `user2`='".$_SESSION['user']."' AND `bookid`='". $bookID."' AND `rating`='dislike'";
                 //echo $like2SQL;
                 mysqli_query($link, $like2SQL);
                 $_SESSION['likeAdded'] = true;
@@ -86,7 +87,7 @@ else{
     //likes
     $likeSQL = "SELECT COUNT(*) 
             FROM ratings
-            WHERE isbn2 = ". $ISBN ." AND rating = 'like'";
+            WHERE bookid = ". $bookID ." AND rating = 'like'";
     $likers = mysqli_query($link, $likeSQL);
     $likeresult = mysqli_fetch_array($likers);
     $numLikes = $likeresult[0];
@@ -95,7 +96,7 @@ else{
     //dislikes
     $dissql = "SELECT COUNT(*) 
             FROM ratings
-            WHERE isbn2 = '". $ISBN ."' AND rating = 'dislike'";
+            WHERE bookid = '". $bookID ."' AND rating = 'dislike'";
     $disrs = mysqli_query($link, $dissql);
     $disresult = mysqli_fetch_array($disrs);
     $numdisLikes= $disresult[0];
@@ -117,14 +118,14 @@ else{
     //echo $likeRate."</br>";
 
     //update rating in table
-    $approvSQL = "UPDATE `books_authors` SET `Approval`='".$likeRate."' WHERE ISBN = ". $ISBN;
+    $approvSQL = "UPDATE `books_authors` SET `Approval`='".$likeRate."' WHERE Bookid = ". $bookID;
     mysqli_query($link, $approvSQL);
     $_SESSION['approval']= $likeRate;
     
     $_SESSION['return'] = "home.php";
     $_SESSION['visitLike'] = true;
 
-     
+    
  echo "<script type=\"text/javascript\">
 window.location.href = ' ".  $_SESSION['return'] ." ' ;
 </script>";
