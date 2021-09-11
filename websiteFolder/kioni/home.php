@@ -170,6 +170,7 @@ jQuery Ajax CDN
                 unset($_SESSION['theme']);
                 unset($_SESSION['identity']);
                 unset($_SESSION['length']);
+				unset($_SESSION['author_name']);
 
                 //GENRES
                 if (!empty($_POST['genre'])) {
@@ -354,6 +355,23 @@ jQuery Ajax CDN
                     if (sizeof($_SESSION['length']) > 0) {
                         $query .= ")";
                     }
+                }
+				if (!empty($_SESSION['author_name'])) {
+                    
+                    
+
+                        if ($whereUsed) {
+                          
+                                $query .= " AND ( AuthName LIKE '%" . $_SESSION['author_name'] . "%')";
+                                
+                            
+                        } else {
+                            $query .= " WHERE  (AuthName LIKE '%" . $_SESSION['author_name'] . "%')";
+                            $whereUsed = true;
+                           
+                        }
+                   
+                   
                 }
                 $query .= ";";
                 //echo "Submit:" .$query;
