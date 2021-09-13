@@ -6,16 +6,17 @@
     margin: auto;
     width: 60%;
     padding: 10px;
+    font-family: 'Montserrat', sans-serif;
   }
   .title{
-    background-color: #FFFFF0;
+    background-color: #946B2D;
     font-size: 150%;
     margin: auto;
     text-align: center;
     width: 40%;
     padding: 10px;
     font-family: 'Montserrat', sans-serif;
-    color: #946B2D;
+    color: black;
     text-transform: uppercase;
   }
   .loginButton{
