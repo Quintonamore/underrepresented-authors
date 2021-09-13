@@ -19,6 +19,16 @@
     color: white;
     text-transform: uppercase;
   }
+.title2{
+    font-size: 150%;
+    margin: auto;
+    text-align: center;
+    width: 40%;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    text-transform: uppercase;
+  }
   .loginButton{
     margin: auto;
     text-align: center;
