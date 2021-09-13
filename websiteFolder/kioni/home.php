@@ -423,7 +423,7 @@ jQuery Ajax CDN
                     }
 
 
-                    //if not signed, click on button and direct to log in page.
+                    //if not signed, click on button and direct to login page.
                     //if signed in, click on button, change color + insert into favorites/ dislikes
                     //if clicked on again, change back to original color and update favorites/ dislikes
                     //update approval column in books_authors table
