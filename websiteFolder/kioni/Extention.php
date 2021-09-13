@@ -48,7 +48,7 @@ $query .= ";";
 			$booklink = $row[11];
 		// what will be the this.responcetext 
 		echo  ""?>
-		<hr><br>
+		<p class='book-theme'> <?php echo $theme2; ?> </p> <hr><br>
                       <img src=' <?php echo $bookcover; ?>'  alt='cover' width='150' height='230' class='image1'>
           <p class='title1'><b>Title:</b> <a href=' <?php echo $booklink; ?>' target='_blank'> <?php echo $title; ?></a></p>
           <p class='author1'><b>By:</b>  <?php echo $authName; ?></p>
