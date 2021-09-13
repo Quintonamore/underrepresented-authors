@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
 .text {
     background-color: #FFFFF0;
     font-size: 100%;
@@ -12,12 +14,16 @@
     text-align: center;
     width: 40%;
     padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: #946B2D;
+    text-transform: uppercase;
   }
   .loginButton{
     margin: auto;
     text-align: center;
   }
   .loginText{
+    font-family: 'Montserrat', sans-serif;
     background-color: #FFFFF0;
     font-size: 100%;
     margin: auto;
@@ -31,7 +37,7 @@
     width: 60%;
     padding: 20px;
     border: 3px solid black;
-  
+
   }
   body{background-image: url("qtpoc2.png");
   backdrop-filter: blur(4px);
@@ -43,7 +49,7 @@
    text-align: center;
     width: 50%;
     padding: 20px;
-  
+
   }
   input[type=text], select {
     width: 100%;
@@ -90,6 +96,7 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
   }
   .likesButtons{
     background-color: #4CAF50;
