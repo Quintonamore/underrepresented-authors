@@ -68,7 +68,14 @@ form.addEventListener('submit', (e) => {
       error.style.visibility = "visible";
     });
   } else {
-    alert('Thank you! We recieved your book recommendation!');
+    addEventListener("submit", function(){
+      //const pop_form = document.getElementById('form-info');
+      var formData = new FormData(form);
+      req = new XMLHttpRequest();
+      req.open("POST", "https://ua.quinton.pizza/saveForm.php");
+      req.send(formData);
+      alert('Thank you! We recieved your book recommendation!');
+    })
   }
 
 });

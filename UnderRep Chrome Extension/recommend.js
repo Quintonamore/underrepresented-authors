@@ -20,6 +20,7 @@ closebtn.addEventListener('click', function(){
 window.addEventListener("message", function(evt){
   var elm = document.createElement('div');
   var div = document.getElementById('pop_info');
+  
   elm.innerHTML = evt.data;
   div.appendChild(elm);
 })

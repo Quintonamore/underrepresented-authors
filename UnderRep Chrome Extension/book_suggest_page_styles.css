@@ -21,7 +21,6 @@
   overflow-y: auto;
   border-radius: 7px;
   outline: 15px solid #946B2D;
-  /*box-shadow: 0px 0px 15px #946B2D;*/
 }
 
 
@@ -67,7 +66,7 @@ label, .theme-select, .length-select{
   color:black;
   font-size: 15px;
   padding: 0px 0px;
-  display:inline-block;
+  display:block;
 }
 
 
@@ -147,7 +146,7 @@ input[type="checkbox"]:checked{
 }
 
 input[type="checkbox"]:checked:after{
-  display: block;
+  display: inline-block;
 }
 
 /*Genre*/
