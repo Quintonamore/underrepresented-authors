@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+
+.pop_wrapper{
+  text-align: center;
+  width: 500px;
+  height: 420px;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 7px;
+  outline: 30px solid #946B2D
+}
+
+.pop_h2, .pop_h3{
+  color: #946B2D;
+}
+
+.pop_p{
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 15px;
+}
+
+#btn-more{
+  width: 30%;
+  height: 45px;
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 0px;
+  background: #946B2D;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  outline:none;
+}
+
+#btn-VisitWebsite{
+  width: 230px;
+  height: 45px;
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 0px;
+  background: #946B2D;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  outline:none;
+
+  position: absolute;
+  bottom: 1.5em;
+  left: 1.5em;
+}
+
+#btn-SuggestBook{
+  width: 230px;
+  height: 45px;
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 0px;
+  background: #946B2D;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  outline:none;
+
+  position: absolute;
+  bottom: 1.5em;
+  left: 17.5em;
+}
+
+
+#btn-more:hover, #btn-VisitWebsite:hover, #btn-SuggestBook:hover{
+  background:#ac7c34;
+}

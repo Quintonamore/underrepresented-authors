@@ -1,0 +1,43 @@
+{
+  "name": "Good Reads Extension",
+  "description": "Suggests books from under-represented authors",
+  "version": "1.0",
+  "manifest_version": 3,
+
+  "icons": {
+    "16": "icon16.png",
+    "128": "icon128.png"
+  },
+
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "host_permissions": ["<all_urls>"],
+
+  "permissions": ["storage", "scripting", "tabs", "contextMenus", "activeTab"],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["*://*.youtube.com/*", "*://*.google.com/*", "*://www.w3schools.com/*", "*://*/*movie*", "*://*/*movies*", "*://*.netflix.com/*", "*://*/*shows*", "*://*.stackoverflow.com/*", "http://34.82.68.145/home.php?", "https://ua.quinton.pizza/home.php", "https://ua.quinton.pizza/*.php?"],
+      "js": ["content.js"],
+      "css": ["demoStyles.css"]
+    }
+  ],
+
+  "web_accessible_resources": [{
+    "resources": ["recommend.html", "recommend.js", "recommendStyle.css", "scriptInjector.js"],
+    "matches": [ "<all_urls>" ],
+    "use_dynamic_url": true
+    }],
+
+  "action": {
+    "default_popup": "demo.html",
+    "default_title": "Search for books",
+    "default_icon": "icon128.png"
+
+  }
+
+}
