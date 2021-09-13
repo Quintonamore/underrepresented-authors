@@ -85,7 +85,7 @@ if(isset($_POST['login'])){
             <p></p>
             <div class = \"message\">
             Please enter a valid username and password. If you would like to create an account, click here: 
-            <input type = 'submit' name = 'create' value = 'Create Account' action = 'createAccount.php'> 
+            <input type = 'submit' name = 'createAccount' value = 'Create Account' action = 'createAccount.php'> 
             </div>";
         }
 
