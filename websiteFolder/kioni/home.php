@@ -559,7 +559,7 @@ jQuery Ajax CDN
                         <form id="buttonForm" name="ratings" method="POST"><br />
                             <?php
                             echo "<img src=\"" . $bookcover . "\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">" ." genre".  $_SESSION['genre2']  . " ". $_SESSION['authName'] . "- \"" . $_SESSION['title'] . "\", " . $_SESSION['year'] . ", ISBN: " . $_SESSION['isbn'] . "</br>
-                    Approval Rating: " . $_SESSION['approval'] . "%, Description: " . $description . " ".; ?>
+                    Approval Rating: " . $_SESSION['approval'] . "%, Description: " . $description . " "; ?>
                             <button class="likesButtons" id="likeB" type="submit" name="like" value="<?php echo $bookid; ?>" formaction="likes.php"> Like </button>
                             <button class="likesButtons" id="dislikeB" type="submit" name="dislike" value="<?php echo $bookid; ?>" formaction="dislikes.php"> Dislike </button>
                         </form>
