@@ -73,6 +73,34 @@ else{
     }
     ?>
 
+    <div class= "text">
+        <div class = "title2">
+            Welcome to Our Site!
+        </div>
+        We're so glad that you've visited our webpage! We hope that you find our 
+        webiste helpful in finding what you're looking for.
+        <div class = "title2">
+           Who We Are 
+        </div>
+        We are a group of students from Pacific Lutheran University who feel that it is important to empower minds
+        through books written by underrepresented authors, while also encouraging technological development through computer learning. 
+        <div class = "title2">
+           Goal of Our Project 
+        </div>
+        Our goal is to gather a list of books that can represent many groups and viewpoints that otherwise are 
+        oftentimes overlooked, silenced, exploited for profit, and used to become performative allies. 
+
+
+
+
+     
+
+
+
+
+
+    </div>
+
 
 </body>
 </html>
