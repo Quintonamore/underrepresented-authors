@@ -26,7 +26,7 @@ else{
     /**FIRST DISLIKE  */
     //if no row exists with user and isbn, add to ratings with like
     //and update database 
-    $checkIfDLike = "SELECT * FROM ratings WHERE bookid = '". $bookid. "' AND user2 = '".$_SESSION['user']."'";
+    $checkIfDLike = "SELECT * FROM ratings WHERE isbn2 = '". $bookid. "' AND user2 = '".$_SESSION['user']."'";
     $checkresult2 = mysqli_query($link, $checkIfDLike);
     if(mysqli_num_rows($checkresult2)==0){
         $DlikeSQLIn = "INSERT INTO ratings 
@@ -45,13 +45,13 @@ else{
         // check database for isbn and 'like'
         /*********UNDISLIKE********/
         
-        $checkDLike = "SELECT * FROM ratings WHERE bookid = '". $bookid. "' AND user2 = '".$_SESSION['user']."' AND rating = 'dislike'";
+        $checkDLike = "SELECT * FROM ratings WHERE isbn2 = '". $bookid. "' AND user2 = '".$_SESSION['user']."' AND rating = 'dislike'";
         //echo $checkLike;
         $checkresultD = mysqli_query($link, $checkDLike);
         //echo ;
         if((isset($_SESSION['dislikeAdded']) && isset($_SESSION['vistDLike']))||(mysqli_num_rows($checkresultD)>0)){
                 //if liked before, delete like from ratings table
-                $undlikeSQL = "DELETE FROM ratings WHERE user2 = '". $_SESSION['user']."' AND bookid = '".$bookid."' AND rating = 'dislike'";
+                $undlikeSQL = "DELETE FROM ratings WHERE user2 = '". $_SESSION['user']."' AND isbn2 = '".$bookid."' AND rating = 'dislike'";
                 //echo $unlikeSQL;
                 mysqli_query($link, $undlikeSQL);
                 //unset session variable
@@ -64,12 +64,12 @@ else{
 
         //if disliked, but liked before, change like to dislike
         /*LIKE TO DISLIKE *******/
-        $checklike = "SELECT * FROM ratings WHERE bookid = '". $bookid. "' AND user2 = '".$_SESSION['user']."' AND rating = 'like'";
+        $checklike = "SELECT * FROM ratings WHERE isbn2 = '". $bookid. "' AND user2 = '".$_SESSION['user']."' AND rating = 'like'";
         //echo $checkDislike;
         $checkresultL = mysqli_query($link, $checklike);
         if(mysqli_num_rows($checkresultL)>0){
                 //change like to dislike
-                $dlike2SQL = "UPDATE `ratings` SET `rating`='dislike' WHERE `user2`='".$_SESSION['user']."' AND `bookid`='". $bookid."' AND `rating`='like'";
+                $dlike2SQL = "UPDATE `ratings` SET `rating`='dislike' WHERE `user2`='".$_SESSION['user']."' AND `isbn2`='". $bookid."' AND `rating`='like'";
                 //echo $like2SQL;
                 mysqli_query($link, $dlike2SQL);
                 $_SESSION['dislikeAdded'] = true; 
@@ -88,7 +88,7 @@ else{
     //likes
     $likeSQL = "SELECT COUNT(*) 
             FROM ratings
-            WHERE bookid = ". $bookid ." AND rating = 'like'";
+            WHERE isbn2 = ". $bookid ." AND rating = 'like'";
     $likers = mysqli_query($link, $likeSQL);
     $likeresult = mysqli_fetch_array($likers);
     $numLikes = $likeresult[0];
@@ -97,7 +97,7 @@ else{
     //dislikes
     $dissql = "SELECT COUNT(*) 
             FROM ratings
-            WHERE bookid = '". $bookid ."' AND rating = 'dislike'";
+            WHERE isbn2 = '". $bookid ."' AND rating = 'dislike'";
     $disrs = mysqli_query($link, $dissql);
     $disresult = mysqli_fetch_array($disrs);
     $numdisLikes= $disresult[0];
