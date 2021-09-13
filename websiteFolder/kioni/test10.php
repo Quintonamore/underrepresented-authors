@@ -74,7 +74,7 @@ else{
                 
                 <form id = "best" name ="bestSellers" method = "POST" ><br/>
                 <?php
-                echo $title . " ". $them2 . " ". $ident2; ?>
+                echo $title . " ". $theme2 . " ". $ident2; ?>
                 </form>
 
                 <?php
