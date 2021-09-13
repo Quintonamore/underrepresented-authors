@@ -92,7 +92,7 @@ else{
 
     <!--Book ISBN-->
      <label for="bookISBN-13">ISBN-13:</label>
-    <input type="integer" id="bookISBN-13" autocomplete="off" name="isbn" placeholder="123" ></input><br>
+    <input type="text" id="bookISBN-13" autocomplete="off" name="isbn"></input><br>
     <span class="form__error" id="isbn-error">ISBN must be 13 digits long.</span>
     <br><br>
 
@@ -107,11 +107,12 @@ else{
           <option value="Short Story">Short Story</option>
 
         </select>
-      </div> <br> <br>
-
+      </div> <br> <br><br>
+      
   <!--Genres-->
   <div class="genres">
     <label>Genre(s):</label>
+    <br><br>
     <ul>
 
       <li>
@@ -156,14 +157,58 @@ else{
         <span class="checkmark"></span>
       </li>
 
+
       <li>
-        <input type="checkbox" id="genre8" name="genre[]" value="romance"></input>
-        <label for="genre8" class="check-word">Romance</label><br><br>
+        <input type="checkbox" id="genre8" name="genre[]" value="action"></input>
+        <label for="genre8" class="check-word">Action</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre9" name="genre[]" value="romance"></input>
+        <label for="genre9" class="check-word">Romance</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre10" name="data[Adventure:]" value="adventure"></input>
+        <label for="genre10" class="check-word">Adventure</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre11" name="genre[]" value="comedy"></input>
+        <label for="genre11" class="check-word">Comedy</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre12" name="genre[]" value="historical fiction"></input>
+        <label for="genre12" class="check-word">Historical Fiction</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre13" name="genre[]" value="young adult"></input>
+        <label for="genre13" class="check-word">Young Adult</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre14" name="genre[]" value="comic"></input>
+        <label for="genre14" class="check-word">Comic</label><br><br>
+        <span class="checkmark"></span>
+      </li>
+
+      <li>
+        <input type="checkbox" id="genre15" name="genre[]" value="nonfiction"></input>
+        <label for="genre15" class="check-word">Nonfiction</label><br><br>
         <span class="checkmark"></span>
       </li>
     </ul>
   </div>
 
+      <br><br>
       <!--Book Theme-->
       <div class="theme-select">
         * Book Theme:
@@ -216,8 +261,8 @@ else{
       <textarea id="bookDes" name="description"></textarea><br><br>
 
         <!--Link to Book-->
-      <label for="booklink">Link to book:</label>
-        <input type="url" id="booklink" name="booklink" autocomplete="off" placeholder="https://www.goodreads.com/en/book/show/53802072-some-girls-do"></input><br><br>
+      <label for="book-link">Link to book:</label>
+        <input type="url" id="book-link" name="booklink" autocomplete="off" placeholder="https://www.goodreads.com/en/book/show/53802072-some-girls-do"></input><br><br>
 
       <!--Link to Image-->
       <label for="image-link">Cover Image Link:</label>
