@@ -77,9 +77,9 @@ else{
     <div class = "space">
         <?php
         //get all the user's liked books
-        $favoritesSQL = "SELECT AuthName, BookTitle, Year, ISBN, Approval,  bookcover, description, books_authors.Bookid
+        $favoritesSQL = "SELECT AuthName, BookTitle, Year, ISBN, Approval,  bookcover, description, books_authors.Bookid, ratings.isbn2
                         FROM books_authors, ratings
-                        WHERE ratings.bookid = books_authors.Bookid AND rating = 'like' AND user2 = '".$_SESSION['user']."'";
+                        WHERE ratings.isbn2 = books_authors.Bookid AND rating = 'like' AND user2 = '".$_SESSION['user']."'";
         $result = mysqli_query($link, $favoritesSQL);
 
         if(mysqli_num_rows($result) > 0){
