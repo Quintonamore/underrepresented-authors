@@ -72,7 +72,6 @@ jQuery Ajax CDN
         <a href=\"home.php\" class=\"button\">Home</a>
         <a href=\"bestSellers.php\" class=\"button\">Our Best-Sellers</a>
         <a href=\"suggestedbook.php\" class=\"button\">Suggest A Book</a>
-        <a href=\"tutorial.php\" class=\"button\">Tutorial</a>
         <a href=\"about.php\" class=\"button\">About Us</a>
         </div>";
     }
@@ -81,7 +80,6 @@ jQuery Ajax CDN
         echo "<div class=\"buttonArea\">
         <a href=\"home.php\" class=\"button\">Home</a>
         <a href=\"bestSellers.php\" class=\"button\">Our Best-Sellers</a>
-        <a href=\"tutorial.php\" class=\"button\">Tutorial</a>
         <a href=\"about.php\" class=\"button\">About Us</a>
         </div>";
     }
