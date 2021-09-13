@@ -3,7 +3,7 @@ session_start();
 require('db.php');
 $userName = "admin1";
 $passWord = "plu123";
-$emailAdd = "plu@plu.edu"
+$emailAdd = "plu@plu.edu";
 
 $query =  "INSERT INTO admins VALUES('".$userName."', SHA1('".$passWord."'), '".$emailAdd."');";
  
