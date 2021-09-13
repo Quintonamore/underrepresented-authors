@@ -236,3 +236,16 @@
 .dropdown-check-list.visible .items {
   display: block;
 }
+
+#dislikeB {
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
