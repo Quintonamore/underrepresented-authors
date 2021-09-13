@@ -152,7 +152,7 @@ jQuery Ajax CDN
             echo "Note: Leave blank if you're not searching for a specific author.";
             ?>
             <br>
-            <button type="submit" name="search" value="Search">Search</button>
+            <button class="button" type="submit" name="search" value="Search">Search</button>
         </form>
         <div class="space" id="space">
 
