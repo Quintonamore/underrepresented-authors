@@ -13,10 +13,10 @@ require('db.php');
         echo '<link rel="stylesheet" href="style.css">';
     }
     ?>
-    <!--JavaScript file 
+    <!--JavaScript file
 <script src="script.js"></script>
- 
-jQuery Ajax CDN 
+
+jQuery Ajax CDN
  <script src=
 "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
  </script>
@@ -35,8 +35,8 @@ jQuery Ajax CDN
         <a href='logout.php'>Logout</a>
         <a href='darkmode.php'>Dark Mode </a>
         </div>
-        </div> ";   
-    } 
+        </div> ";
+    }
     else{
         //for admin
         if (isset($_SESSION['inDB']) && isset($_SESSION['user']) && $_SESSION['inDB'] && isset($_SESSION['adminUser'])) {
@@ -46,8 +46,8 @@ jQuery Ajax CDN
             <a href='logout.php'>Logout</a>
             <a href='darkmode.php'>Dark Mode </a>
             </div>
-            </div> ";   
-        } 
+            </div> ";
+        }
         else {
             echo "<div class='dropdown'> <button class='dropbtn'>Account</button> <div class='dropdown-content'>
             <a href='login.php'>Log In</a>
@@ -58,15 +58,15 @@ jQuery Ajax CDN
         }
 
     }
-    
+
     ?>
 
     <!-- Begin Webpage -->
     <div class="title">
-        Title
+        <h1>GreatReads</h1>
     </div>
     <?php
-    //if reg user 
+    //if reg user
     if(isset($_SESSION['regUser'])){
         echo "<div class=\"buttonArea\">
         <a href=\"home.php\" class=\"button\">Home</a>
@@ -86,12 +86,12 @@ jQuery Ajax CDN
         </div>";
     }
     ?>
-    
+
     <div class="text">
         <form id="form" action="" method="post">
             <label> Genre
                 <fieldset>
-				
+
                     <input type="checkbox" name="genre[]" value="Any">Any<br>
                     <input type="checkbox" name="genre[]" value="Biography">Biography<br>
                     <input type="checkbox" name="genre[]" value="Autobiography">Autobiography<br>
@@ -144,7 +144,7 @@ jQuery Ajax CDN
 					<input type="checkbox" name="length[]" value="Novella">Novella<br>
 					<input type="checkbox" name="length[]" value="Short Story">Short Story<br>
                     <input type="checkbox" name="length[]" value="Poem">Poem<br>
-                    
+
                 </fieldset>
             </label>
             <label>Author's Name (FirstName LastName)
@@ -162,7 +162,7 @@ jQuery Ajax CDN
             <?php
             //if search is clicked, unset all previous session variables
             //if search is not clicked and return session is set, keep previous session variables
-            //if search is not clicked and return session is not set, show nothing. 
+            //if search is not clicked and return session is not set, show nothing.
 
             if (isset($_POST["search"])) {
                 //unset all previous session variables
@@ -234,7 +234,7 @@ jQuery Ajax CDN
 
                 //LENGTH
                 if (!empty($_POST['length'])) {
-                    //loop to store and display 
+                    //loop to store and display
                     $length = $_POST['length'];
                     $_SESSION['length'] = $length;
                     echo "Lengths chosen: </br>";
@@ -251,7 +251,7 @@ jQuery Ajax CDN
                     }
                 }
 
-                //if specific author, search database with typed in name with selected genres etc. 
+                //if specific author, search database with typed in name with selected genres etc.
                 if (!empty($_POST['Name'])) {
                     $author_name = $_POST['Name'];
                     $_SESSION['author_name'] = $author_name;
@@ -357,21 +357,21 @@ jQuery Ajax CDN
                     }
                 }
 				if (!empty($_SESSION['author_name'])) {
-                    
-                    
+
+
 
                         if ($whereUsed) {
-                          
+
                                 $query .= " AND ( AuthName LIKE '%" . $_SESSION['author_name'] . "%')";
-                                
-                            
+
+
                         } else {
                             $query .= " WHERE  (AuthName LIKE '%" . $_SESSION['author_name'] . "%')";
                             $whereUsed = true;
-                           
+
                         }
-                   
-                   
+
+
                 }
                 $query .= ";";
                 //echo "Submit:" .$query;
@@ -411,7 +411,7 @@ jQuery Ajax CDN
 
                         <form id="buttonForm" name="ratings" method="POST"><br />
                             <?php
-                            echo "<img src=\"" . $bookcover . "\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">" . $_SESSION['authName'] . "- \"" . $_SESSION['title'] . "\", " . $_SESSION['year'] . ", ISBN: " . $_SESSION['isbn'] . "</br> 
+                            echo "<img src=\"" . $bookcover . "\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">" . $_SESSION['authName'] . "- \"" . $_SESSION['title'] . "\", " . $_SESSION['year'] . ", ISBN: " . $_SESSION['isbn'] . "</br>
                     Approval Rating: " . $_SESSION['approval'] . "%, Description: " . $description . ""; ?>
                             <button class="likesButtons" id="likeB" type="submit" name="like" value="<?php echo $bookid; ?>" formaction="likes.php"> Like </button>
                             <button class="likesButtons" id="dislikeB" type="submit" name="dislike" value="<?php echo $bookid; ?>" formaction="dislikes.php"> Dislike </button>
@@ -558,7 +558,7 @@ jQuery Ajax CDN
 
                         <form id="buttonForm" name="ratings" method="POST"><br />
                             <?php
-                            echo "<img src=\"" . $bookcover . "\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">" . $_SESSION['authName'] . "- \"" . $_SESSION['title'] . "\", " . $_SESSION['year'] . ", ISBN: " . $_SESSION['isbn'] . "</br> 
+                            echo "<img src=\"" . $bookcover . "\" alt=\"Girl in a jacket\" width=\"40\" height=\"60\">" . $_SESSION['authName'] . "- \"" . $_SESSION['title'] . "\", " . $_SESSION['year'] . ", ISBN: " . $_SESSION['isbn'] . "</br>
                     Approval Rating: " . $_SESSION['approval'] . "%, Description: " . $description . ""; ?>
                             <button class="likesButtons" id="likeB" type="submit" name="like" value="<?php echo $bookid; ?>" formaction="likes.php"> Like </button>
                             <button class="likesButtons" id="dislikeB" type="submit" name="dislike" value="<?php echo $bookid; ?>" formaction="dislikes.php"> Dislike </button>
